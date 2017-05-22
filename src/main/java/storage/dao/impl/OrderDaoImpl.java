@@ -4,13 +4,15 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
+
 
 import storage.dao.OrderDao;
-import storage.datasource.ConnectionHandler;
+import storage.datasource.Utils;
 import storage.model.MyOrder;
-import storage.model.OrderItem;
 
 public class OrderDaoImpl implements OrderDao {
+	
 	
 	/**
 	 * Az osztály EntityManagerFactory-ja, amelytől az EntityManager származni fog.
@@ -21,7 +23,7 @@ public class OrderDaoImpl implements OrderDao {
 	 * Az osztály paraméter nélküli konstruktora, amely beállítja az EntityManagerFactory-t.
 	 */
 	public OrderDaoImpl() {
-		this.emf = ConnectionHandler.getHandler().getEntityManagerFactory();
+		this.emf = Utils.getEntityManagerFactory();
 	}
 
 	/* (non-Javadoc)
@@ -44,9 +46,10 @@ public class OrderDaoImpl implements OrderDao {
 		List<MyOrder> list = null;
 		
 		try{
-			list = em.createQuery("SELECT o from MyOrder o", MyOrder.class).getResultList();
+			TypedQuery<MyOrder> query = em.createQuery("SELECT o from MyOrder o", MyOrder.class);
+			list = query.getResultList();
 		}catch(Exception e){
-			System.out.println("Kaptam egy errort?");
+			
 		}finally{
 			em.close();
 		}

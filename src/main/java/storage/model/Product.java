@@ -30,7 +30,7 @@ public class Product implements Serializable {
 	/**
 	 * A termék id-ja.
 	 */
-	private Long id;
+	private int id;
 	
 	/**
 	 * A termék raktározási száma.
@@ -75,7 +75,7 @@ public class Product implements Serializable {
 	public Product() {
 	}
 	
-	public Product(Long id, String sku, String name, float price, int quantity, int optimalQuantity,
+	public Product(int id, String sku, String name, float price, int quantity, int optimalQuantity,
 			int minimumQuantity, LocalDate expiryDate) {
 		this.id = id;
 		this.sku = sku;
@@ -96,7 +96,7 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="product_id")
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -104,7 +104,7 @@ public class Product implements Serializable {
 	 * Beállítja a termék id-ját.
 	 * @param id A termék id-ja
 	 */
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

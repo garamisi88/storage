@@ -19,7 +19,7 @@ import javax.persistence.GeneratedValue;
 @Entity
 public class MyOrder implements Serializable {
 	
-	private Long id;
+	private int id;
 	
 	private Collection<OrderItem> orderItems;
 	
@@ -28,11 +28,11 @@ public class MyOrder implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="order_id")
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

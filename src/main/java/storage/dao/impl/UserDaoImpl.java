@@ -7,7 +7,7 @@ import javax.persistence.NoResultException;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import storage.dao.UserDao;
-import storage.datasource.ConnectionHandler;
+import storage.datasource.Utils;
 import storage.model.User;
 
 /**
@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao{
 	 * Az osztály paraméter nélküli konstruktora, amely beállítja az EntityManagerFactory-t.
 	 */
 	public UserDaoImpl() {
-		this.emf = ConnectionHandler.getHandler().getEntityManagerFactory();
+		this.emf = Utils.getEntityManagerFactory();
 	}
 
 	/* (non-Javadoc)

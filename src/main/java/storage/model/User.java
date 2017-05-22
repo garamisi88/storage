@@ -16,7 +16,7 @@ public class User {
 	/**
 	 * A felhasználó id-ja.
 	 */
-	private Long id;
+	private int id;
 	
 	/**
 	 * A felhasználó neve.
@@ -39,7 +39,7 @@ public class User {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -47,7 +47,7 @@ public class User {
 	 * A felhasználó id-ját beállító metódus.
 	 * @param id A felhasználó id-ja
 	 */
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

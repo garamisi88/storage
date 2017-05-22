@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import storage.datasource.ConnectionHandler;
+import storage.datasource.Utils;
 import storage.model.User;
 
 
@@ -149,7 +149,7 @@ public class App extends Application {
 	 * Ez a függvény kezeli le az alkalmazás bezárását.
 	 */
 	public void closeHandler(){
-		ConnectionHandler.getHandler().connectionClose();
+		Utils.connectionClose();
 		System.exit(0);
 	}
 	

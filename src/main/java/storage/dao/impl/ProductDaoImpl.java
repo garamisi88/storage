@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import storage.dao.ProductDao;
-import storage.datasource.ConnectionHandler;
+import storage.datasource.Utils;
 import storage.model.Product;
 
 /**
@@ -25,7 +25,7 @@ public class ProductDaoImpl implements ProductDao{
 	 * Az osztály paraméter nélküli konstruktora, amely beállítja az EntityManagerFactory-t.
 	 */
 	public ProductDaoImpl() {
-		this.emf = ConnectionHandler.getHandler().getEntityManagerFactory();
+		this.emf = Utils.getEntityManagerFactory();
 	}
 
 	

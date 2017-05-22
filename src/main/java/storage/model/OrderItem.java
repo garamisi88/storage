@@ -22,7 +22,7 @@ public class OrderItem implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="item_id")
-	private Long id; 
+	private int id; 
 	
 	private MyOrder order;
 	
@@ -32,11 +32,11 @@ public class OrderItem implements Serializable{
 	
 	private float price;
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
