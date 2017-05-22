@@ -17,14 +17,6 @@ import javax.persistence.OneToMany;
  * @author Misi
  * 
  */
-/**
- * @author Misi
- *
- */
-/**
- * @author Misi
- *
- */
 @Entity
 public class Product implements Serializable {
 
