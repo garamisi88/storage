@@ -24,6 +24,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public boolean validateProduct(Product product) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}

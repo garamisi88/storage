@@ -12,17 +12,16 @@ public interface ProductDao {
 	
 	/**
 	 * A termék mentését végző függvény.
-	 * @param product A mentendő product objektum
+	 * @param product A mentendő {@link storage.model.Product} objektum
 	 */
 	void save(Product product);
 
 	/**
 	 * A termékek módosítását végző függvény.
-	 * @param product A módosítani kívánt product objectum
+	 * @param product A módosítani kívánt {@link storage.model.Product} objectum
 	 */
 	void update(Product product);
 	
-	Product get(Long id);
 	/**
 	 * Visszaadja az összes terméket.
 	 * @return Termékek listája

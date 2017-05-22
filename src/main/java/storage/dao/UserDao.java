@@ -11,16 +11,16 @@ public interface UserDao {
 	
 	/**
 	 * A felhasználó mentését végző metódus.
-	 * @param user A mentendő User objectum
+	 * @param user A mentendő {@link storage.model.User} objectum
 	 */
 	void save(User user);
 	
 	/**
 	 * A felhasználót megtaláló függvény.
-	 * @param username A user felhasználóneve
+	 * @param username A user felhasználóneve ({@link storage.model.User})
 	 * @param password A user jelszava
-	 * @return TODO
-	 * @throws Exception 
+	 * @return TODO Visszatér a talált {@link storage.model.User} objektummal
+	 * @throws Exception Abban esetben, ha nem sikerül authentikálni a felhasználót
 	 */
 	User userAuth(String username, String password) throws Exception;
 }
