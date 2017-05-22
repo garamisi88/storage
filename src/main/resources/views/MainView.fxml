@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="storage.view.MainViewController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Profil">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#closeMenuAction" text="Bezárás" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Termékek">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Termékek listája" />
+                  <MenuItem mnemonicParsing="false" text="Új termék felvitele" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Rendelések">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Rendelések listája" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
