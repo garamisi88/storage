@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -223,7 +224,7 @@ public class Product implements Serializable {
 	}
 	
 	
-	@OneToMany(mappedBy="product")
+	@OneToMany(mappedBy="product", fetch=FetchType.LAZY)
 	@Column(nullable=true)
 	public Collection<OrderItem> getOrderItems() {
 		return orderItems;
