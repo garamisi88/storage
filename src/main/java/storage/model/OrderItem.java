@@ -24,8 +24,12 @@ public class OrderItem implements Serializable{
 	@Column(name="item_id")
 	private int id; 
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="order_id")
 	private MyOrder order;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="product_id")
 	private Product product;
 	
 	private int quantity;
@@ -40,8 +44,7 @@ public class OrderItem implements Serializable{
 		this.id = id;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="order_id")
+	
 	public MyOrder getOrder() {
 		return order;
 	}
@@ -50,8 +53,7 @@ public class OrderItem implements Serializable{
 		this.order = order;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="product_id")
+	
 	public Product getProduct() {
 		return product;
 	}

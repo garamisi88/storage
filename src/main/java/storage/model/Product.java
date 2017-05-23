@@ -23,6 +23,9 @@ public class Product implements Serializable {
 	/**
 	 * A termék id-ja.
 	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="product_id")
 	private int id;
 	
 	/**
@@ -48,11 +51,13 @@ public class Product implements Serializable {
 	/**
 	 * A termék optimális készlete.
 	 */
+	@Column(nullable=true)
 	private int optimalQuantity;
 	
 	/**
 	 * A termék mininmális készlete.
 	 */
+	@Column(nullable=true)
 	private int minimumQuantity;
 	
 	/**
@@ -63,6 +68,8 @@ public class Product implements Serializable {
 	/**
 	 * Azok a rendelés tételek, amelyekben a termék szerepel.
 	 */
+	@OneToMany(mappedBy="product", fetch=FetchType.LAZY)
+	@Column(nullable=true)
 	private Collection<OrderItem> orderItems;
 
 	public Product() {
@@ -86,9 +93,6 @@ public class Product implements Serializable {
 	 * Visszaadja a termék id-ját.
 	 * @return A termék id-ja
 	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="product_id")
 	public int getId() {
 		return id;
 	}
@@ -169,7 +173,6 @@ public class Product implements Serializable {
 	 * Visszaadja a termék optimális készletét.
 	 * @return Optimális készlet
 	 */
-	@Column(nullable=true)
 	public int getOptimalQuantity() {
 		return optimalQuantity;
 	}
@@ -186,7 +189,6 @@ public class Product implements Serializable {
 	 * Visszaadja a termék minimális készletét.
 	 * @return A termék minimális készlete
 	 */
-	@Column(nullable=true)
 	public int getMinimumQuantity() {
 		return minimumQuantity;
 	}
@@ -216,8 +218,7 @@ public class Product implements Serializable {
 	}
 	
 	
-	@OneToMany(mappedBy="product", fetch=FetchType.LAZY)
-	@Column(nullable=true)
+	
 	public Collection<OrderItem> getOrderItems() {
 		return orderItems;
 	}

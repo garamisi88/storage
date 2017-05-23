@@ -19,15 +19,17 @@ import javax.persistence.GeneratedValue;
 @Entity
 public class MyOrder implements Serializable {
 	
-	private int id;
-	
-	private Collection<OrderItem> orderItems;
-	
-	private LocalDate orderDate;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="order_id")
+	private int id;
+	
+	@OneToMany(mappedBy="order")
+	private Collection<OrderItem> orderItems;
+	
+	@Column(name="order_date")
+	private LocalDate orderDate;
+
 	public int getId() {
 		return id;
 	}
@@ -36,7 +38,6 @@ public class MyOrder implements Serializable {
 		this.id = id;
 	}
 	
-	@OneToMany(mappedBy="order")
 	public Collection<OrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -45,7 +46,6 @@ public class MyOrder implements Serializable {
 		this.orderItems = orderItems;
 	}
 	
-	@Column(name="order_date")
 	public LocalDate getOrderDate() {
 		return orderDate;
 	}

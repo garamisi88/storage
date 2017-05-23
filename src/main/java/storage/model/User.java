@@ -16,6 +16,8 @@ public class User {
 	/**
 	 * A felhasználó id-ja.
 	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	/**
@@ -37,8 +39,6 @@ public class User {
 	 * A felhasználó id-ját visszaadó metódus.
 	 * @return a felhasználó id-ja.
 	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getId() {
 		return id;
 	}
