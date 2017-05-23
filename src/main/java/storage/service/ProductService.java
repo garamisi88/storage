@@ -2,6 +2,11 @@ package storage.service;
 
 import storage.model.Product;
 
+/**
+ * Ez az interfész írja le a termékek kezelését.
+ * @author gara.mihaly
+ *
+ */
 public interface ProductService {
 	
 	/**

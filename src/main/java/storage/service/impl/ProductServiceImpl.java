@@ -7,6 +7,11 @@ import storage.dao.impl.ProductDaoImpl;
 import storage.model.Product;
 import storage.service.ProductService;
 
+/**
+ * A {@link storage.service.ProductService} interfészt implementáló osztály.
+ * @author gara.mihaly
+ *
+ */
 public class ProductServiceImpl implements ProductService{
 
 	/* (non-Javadoc)
