@@ -29,6 +29,7 @@ public class OrderDaoImpl implements OrderDao {
 	/* (non-Javadoc)
 	 * @see storage.dao.OrderDao#save(storage.model.MyOrder)
 	 */
+	@Override
 	public void save(MyOrder order){
 		EntityManager em = emf.createEntityManager();
 		
@@ -41,6 +42,7 @@ public class OrderDaoImpl implements OrderDao {
 	/* (non-Javadoc)
 	 * @see storage.dao.OrderDao#getAll()
 	 */
+	@Override
 	public List<MyOrder> getAll(){
 		EntityManager em = emf.createEntityManager();
 		List<MyOrder> list = null;

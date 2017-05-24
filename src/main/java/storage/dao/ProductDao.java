@@ -23,6 +23,13 @@ public interface ProductDao {
 	void update(Product product);
 	
 	/**
+	 * Visszaadja a paraméterként kapott id-hoz tartozó {@link storage.model.Product} osztály megfelelő példányát.
+	 * @param id a termék idja
+	 * @return {@link storage.model.Product} objektum
+	 */
+	Product get(int id);
+	
+	/**
 	 * Visszaadja az összes terméket.
 	 * @return Termékek listája
 	 */

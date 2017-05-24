@@ -32,6 +32,7 @@ public class ProductDaoImpl implements ProductDao{
 	/* (non-Javadoc)
 	 * @see storage.dao.ProductDao#save(storage.model.Product)
 	 */
+	@Override
 	public void save(Product product) {
 		EntityManager em = emf.createEntityManager();
 		
@@ -44,6 +45,7 @@ public class ProductDaoImpl implements ProductDao{
 	/* (non-Javadoc)
 	 * @see storage.dao.ProductDao#update(storage.model.Product)
 	 */
+	@Override
 	public void update(Product product) {
 		EntityManager em = emf.createEntityManager();
 		
@@ -56,6 +58,7 @@ public class ProductDaoImpl implements ProductDao{
 	/* (non-Javadoc)
 	 * @see storage.dao.ProductDao#getAll()
 	 */
+	@Override
 	public List<Product> getAll() {
 		EntityManager em = emf.createEntityManager();
 		List<Product> list = em.createQuery("SELECT p FROM Product p", Product.class).getResultList();
@@ -66,6 +69,7 @@ public class ProductDaoImpl implements ProductDao{
 	/* (non-Javadoc)
 	 * @see storage.dao.ProductDao#getOrderableProducts()
 	 */
+	@Override
 	public List<Product> getOrderableProducts() {
 		EntityManager em = emf.createEntityManager();
 		List<Product> list = em.createQuery("SELECT p FROM Product p WHERE p.quantity < p.minimumQuantity", Product.class).getResultList();
@@ -76,6 +80,7 @@ public class ProductDaoImpl implements ProductDao{
 	/* (non-Javadoc)
 	 * @see storage.dao.ProductDao#getWasteProducts()
 	 */
+	@Override
 	public List<Product> getWasteProducts() {
 		EntityManager em = emf.createEntityManager();
 		List<Product> list = em.createQuery("SELECT p FROM Product p WHERE p.expiryDate < now()", Product.class).getResultList();
@@ -84,7 +89,11 @@ public class ProductDaoImpl implements ProductDao{
 	}
 
 
-	public Product get(Long id) {
+	/* (non-Javadoc)
+	 * @see storage.dao.ProductDao#get(int)
+	 */
+	@Override
+	public Product get(int id) {
 		EntityManager em = emf.createEntityManager();
 		Product product = null;
 		try{

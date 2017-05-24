@@ -32,6 +32,7 @@ public class UserDaoImpl implements UserDao{
 	/* (non-Javadoc)
 	 * @see storage.dao.UserDao#save(storage.model.User)
 	 */
+	@Override
 	public void save(User user) {
 		EntityManager em = emf.createEntityManager();
 		try{
@@ -48,6 +49,7 @@ public class UserDaoImpl implements UserDao{
 	/* (non-Javadoc)
 	 * @see storage.dao.UserDao#find(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public User userAuth(String username, String password) throws Exception {
 		EntityManager em = emf.createEntityManager();
 		User user = null;
