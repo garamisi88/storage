@@ -132,15 +132,16 @@ public class App extends Application {
 	/**
 	 * Az alkalmazás fő nézetét betöltő metódus.
 	 */
-	public void showMainView(){
+	public void changeView(String viewFile){
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(App.class.getResource("/views/MainView.fxml"));
+			loader.setLocation(App.class.getResource("/views/"+viewFile+".fxml"));
 			
 			view = (BorderPane)loader.load();
 			Scene scene = new Scene(view);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
 		}catch(IOException e){
 			
 		}

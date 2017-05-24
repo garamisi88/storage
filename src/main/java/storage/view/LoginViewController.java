@@ -40,7 +40,7 @@ public class LoginViewController {
 		try{
 			User user = dao.userAuth(usernameField.getText(), passwordField.getText());
 			App.getInstance().setUser(user);
-			App.getInstance().showMainView();
+			App.getInstance().changeView("OrderListView");
 		}catch(Exception e){
 			errorLabel.setText(e.getMessage());
 		}
