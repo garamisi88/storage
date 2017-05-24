@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 import storage.dao.ProductDao;
 import storage.datasource.Utils;
@@ -61,8 +62,16 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public List<Product> getAll() {
 		EntityManager em = emf.createEntityManager();
-		List<Product> list = em.createQuery("SELECT p FROM Product p", Product.class).getResultList();
-		em.close();
+		List<Product> list = null;
+		try{
+			TypedQuery<Product> query = em.createQuery("select p from Product p", Product.class);
+			list = query.getResultList();
+		}catch(Exception e){
+			System.out.println("Kaptam egy hibat");
+			System.out.println(e.getMessage());
+		}finally{
+			em.close();
+		}
 		return list;
 	}
 

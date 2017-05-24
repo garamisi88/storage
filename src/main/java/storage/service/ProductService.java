@@ -1,5 +1,7 @@
 package storage.service;
 
+import java.util.List;
+
 import storage.model.Product;
 
 /**
@@ -41,4 +43,10 @@ public interface ProductService {
 	 * @return float A termék eladási ára
 	 */
 	float getSellPrice(Product product);
+	
+	/**
+	 * Visszaadja az összes terméket.
+	 * @return {@link storage.model.Product} objecktumok listája
+	 */
+	List<Product> getAll();
 }

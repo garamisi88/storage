@@ -2,6 +2,7 @@ package storage.service.impl;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.List;
 
 import storage.dao.impl.ProductDaoImpl;
 import storage.model.Product;
@@ -67,5 +68,13 @@ public class ProductServiceImpl implements ProductService{
 			multiplier = 0.7;
 		}
 		return (float) (product.getPrice() * multiplier);
+	}
+
+	@Override
+	public List<Product> getAll() {
+		ProductDaoImpl dao = new ProductDaoImpl();
+		List<Product> list = dao.getAll();
+		
+		return list;
 	}
 }
