@@ -55,6 +55,7 @@ public class App extends Application {
 	public static void main(String[] args) {
 		StorageInitialization.setUser();
 		StorageInitialization.setBaseProducts();
+		StorageInitialization.setCustomer();
 		StorageInitialization.setOrder();
 		
 		launch(args);

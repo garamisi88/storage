@@ -6,9 +6,12 @@ import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import storage.dao.impl.CustomerDaoImpl;
 import storage.dao.impl.OrderDaoImpl;
 import storage.dao.impl.ProductDaoImpl;
 import storage.dao.impl.UserDaoImpl;
+import storage.model.Address;
+import storage.model.Customer;
 import storage.model.MyOrder;
 import storage.model.OrderItem;
 import storage.model.Product;
@@ -59,19 +62,41 @@ public class StorageInitialization {
 	public static void setOrder(){
 		OrderDaoImpl dao = new OrderDaoImpl();
 		ProductDaoImpl productDao = new ProductDaoImpl();
-
+		CustomerDaoImpl customerDao = new CustomerDaoImpl();
 		MyOrder order = new MyOrder();
+		
+		
+		Customer customer = customerDao.get(1);
+		order.setCustomer(customer);
+		
 		order.setOrderDate(LocalDate.of(2017, 5, 4));
-		Product product = productDao.get((long)1);
+		
+		Product product = productDao.get(1);
+		List<OrderItem> items = new LinkedList<OrderItem>();
+		
 		OrderItem item = new OrderItem();
 		item.setOrder(order);
 		item.setProduct(product);
 		item.setPrice(100);
 		item.setQuantity(2);
-		List<OrderItem> items = new LinkedList<OrderItem>();
+		
 		items.add(item);
+		
 		order.setOrderItems(items);
+		
 		dao.save(order);
 
+	}
+
+	public static void setCustomer() {
+		CustomerDaoImpl dao = new CustomerDaoImpl();
+		
+		Customer customer = new Customer("Gara Mihály", "garamisi88@gmail.com", "+36301234567");
+		Address address = new Address("4024", "Debrecen", "Sumen utca 16", "Magyarország");
+		customer.setAddress(address);
+		
+		dao.save(customer);
+		
+		
 	}
 }

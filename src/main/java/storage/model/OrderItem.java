@@ -1,7 +1,5 @@
 package storage.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="order_items")
-public class OrderItem implements Serializable{
+public class OrderItem{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="item_id")

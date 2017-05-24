@@ -1,6 +1,5 @@
 package storage.model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -18,7 +17,7 @@ import javax.persistence.OneToMany;
  * 
  */
 @Entity
-public class Product implements Serializable {
+public class Product {
 
 	/**
 	 * A termék id-ja.

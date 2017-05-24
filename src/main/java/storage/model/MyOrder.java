@@ -1,14 +1,15 @@
 package storage.model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Collection;import javax.persistence.CascadeType;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 
 /**
@@ -17,7 +18,7 @@ import javax.persistence.GeneratedValue;
  *
  */
 @Entity
-public class MyOrder implements Serializable {
+public class MyOrder {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +30,10 @@ public class MyOrder implements Serializable {
 	
 	@Column(name="order_date")
 	private LocalDate orderDate;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="customer_id")
+	private Customer customer;
 
 	public int getId() {
 		return id;
@@ -57,6 +62,16 @@ public class MyOrder implements Serializable {
 	public void addOrderItem(OrderItem item){
 		this.orderItems.add(item);
 	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	
 	
 	
 	
