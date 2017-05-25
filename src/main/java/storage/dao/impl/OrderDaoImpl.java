@@ -6,12 +6,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import storage.dao.OrderDao;
 import storage.datasource.Utils;
 import storage.model.MyOrder;
 
 public class OrderDaoImpl implements OrderDao {
+	
+	/**
+	 * Az osztályon belül történő események naplózását végző Logger osztály.
+	 */
+	private Logger logger = LoggerFactory.getLogger(OrderDaoImpl.class);
 	
 	
 	/**
@@ -32,11 +39,15 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public void save(MyOrder order){
 		EntityManager em = emf.createEntityManager();
-		
-		em.getTransaction().begin();
-		em.persist(order);
-		em.getTransaction().commit();
-		em.close();
+		try{
+			em.getTransaction().begin();
+			em.persist(order);
+			em.getTransaction().commit();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}finally{
+			em.close();
+		}
 	}
 	
 	/* (non-Javadoc)
@@ -51,7 +62,7 @@ public class OrderDaoImpl implements OrderDao {
 			TypedQuery<MyOrder> query = em.createQuery("SELECT o from MyOrder o", MyOrder.class);
 			list = query.getResultList();
 		}catch(Exception e){
-			
+			logger.error(e.getMessage());
 		}finally{
 			em.close();
 		}

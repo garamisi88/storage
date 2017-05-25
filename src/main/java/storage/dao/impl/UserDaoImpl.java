@@ -5,6 +5,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import storage.dao.UserDao;
 import storage.datasource.Utils;
@@ -16,6 +18,12 @@ import storage.model.User;
  *
  */
 public class UserDaoImpl implements UserDao{
+
+	/**
+	 * Az osztályon belül történő események naplózását végző Logger osztály.
+	 */
+	private Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
+	
 	
 	/**
 	 * Az osztály EntityManagerFactory-ja.
@@ -40,7 +48,7 @@ public class UserDaoImpl implements UserDao{
 			em.persist(user);
 			em.getTransaction().commit();
 		}catch(Exception e){
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}finally{
 			em.close();
 		}

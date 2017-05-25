@@ -2,6 +2,9 @@ package storage;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,6 +24,10 @@ import storage.model.User;
  */
 public class App extends Application {
 	
+	/**
+	 * Az osztályon belül történő események naplózását végző Logger osztály.
+	 */
+	private static Logger logger = LoggerFactory.getLogger(App.class); 
 	/**
 	 * Az alkalmazás Stage-e.
 	 */
@@ -53,11 +60,16 @@ public class App extends Application {
 	 * @param args parancssori argunemtumok
 	 */
 	public static void main(String[] args) {
-		StorageInitialization.setUser();
-		StorageInitialization.setBaseProducts();
-		StorageInitialization.setCustomer();
-		StorageInitialization.setOrder();
 		
+		logger.info("Elindult az alkalmazás!");
+		StorageInitialization.setUser();
+		logger.info("Inicializálásra kerültek a userek.");
+		StorageInitialization.setBaseProducts();
+		logger.info("Beszúrtam az első terméket az adatbázisba");
+		StorageInitialization.setCustomer();
+		logger.info("Létrejött a vásárló.");
+		StorageInitialization.setOrder();
+		logger.info("Mentésre került az alap rendelés");
 		launch(args);
 	}
 
@@ -76,7 +88,7 @@ public class App extends Application {
 		try{
 			showLoginView();
 		}catch(Exception e){
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 	}
 	/**
@@ -127,6 +139,7 @@ public class App extends Application {
 		Scene scene = new Scene(view);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		logger.info("Elindult az alkalmazás");
 	}
 	
 	
@@ -143,9 +156,10 @@ public class App extends Application {
 			Scene scene = new Scene(view);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
 			
 		}catch(IOException e){
-			
+			logger.error(e.getMessage());
 		}
 	}
 	

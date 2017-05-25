@@ -6,6 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import storage.dao.ProductDao;
 import storage.datasource.Utils;
 import storage.model.Product;
@@ -16,6 +19,11 @@ import storage.model.Product;
  *
  */
 public class ProductDaoImpl implements ProductDao{
+	
+	/**
+	 * Az osztályon belül történő események naplózását végző Logger osztály.
+	 */
+	private Logger logger = LoggerFactory.getLogger(ProductDaoImpl.class);
 	
 	/**
 	 * Az osztály EntityManagerFactory-ja.
@@ -36,11 +44,15 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public void save(Product product) {
 		EntityManager em = emf.createEntityManager();
-		
-		em.getTransaction().begin();
-		em.persist(product);
-		em.getTransaction().commit();
-		em.close();
+		try{
+			em.getTransaction().begin();
+			em.persist(product);
+			em.getTransaction().commit();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}finally{
+			em.close();
+		}
 	}
 
 	/* (non-Javadoc)
@@ -49,11 +61,15 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public void update(Product product) {
 		EntityManager em = emf.createEntityManager();
-		
-		em.getTransaction().begin();
-		em.merge(product);
-		em.getTransaction().commit();
-		em.close();
+		try{
+			em.getTransaction().begin();
+			em.merge(product);
+			em.getTransaction().commit();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}finally{
+			em.close();
+		}
 	}
 
 	/* (non-Javadoc)
@@ -67,8 +83,7 @@ public class ProductDaoImpl implements ProductDao{
 			TypedQuery<Product> query = em.createQuery("select p from Product p", Product.class);
 			list = query.getResultList();
 		}catch(Exception e){
-			System.out.println("Kaptam egy hibat");
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 		}finally{
 			em.close();
 		}
@@ -81,8 +96,16 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public List<Product> getOrderableProducts() {
 		EntityManager em = emf.createEntityManager();
-		List<Product> list = em.createQuery("SELECT p FROM Product p WHERE p.quantity < p.minimumQuantity", Product.class).getResultList();
-		em.close();
+		List<Product> list = null;
+		try{
+			TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.quantity < p.minimumQuantity", Product.class);
+			list = query.getResultList();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}finally{
+			em.close();	
+		}
+		 
 		return list;
 	}
 
@@ -92,8 +115,15 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public List<Product> getWasteProducts() {
 		EntityManager em = emf.createEntityManager();
-		List<Product> list = em.createQuery("SELECT p FROM Product p WHERE p.expiryDate < now()", Product.class).getResultList();
-		em.close();
+		List<Product> list = null;
+		try{
+			TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.expiryDate < now()", Product.class);
+			list = query.getResultList();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}finally{
+			em.close();
+		}
 		return list;
 	}
 
@@ -108,7 +138,7 @@ public class ProductDaoImpl implements ProductDao{
 		try{
 			product = em.find(Product.class, id);
 		}catch(Exception e){
-			
+			logger.error(e.getMessage());
 		}finally{
 			em.close();
 		}

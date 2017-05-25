@@ -3,6 +3,9 @@ package storage.dao.impl;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import storage.dao.CustomerDao;
 import storage.datasource.Utils;
 import storage.model.Customer;
@@ -14,6 +17,7 @@ import storage.model.Customer;
  */
 public class CustomerDaoImpl implements CustomerDao{
 
+	private Logger logger = LoggerFactory.getLogger(CustomerDaoImpl.class);
 	/**
 	 * Az osztály EntityManagerFactory-ja, amelytől az EntityManager származni fog.
 	 */
@@ -37,7 +41,7 @@ public class CustomerDaoImpl implements CustomerDao{
 			em.persist(customer);
 			em.getTransaction().commit();
 		}catch(Exception e){
-			
+			logger.error(e.getMessage());
 		}finally{
 			em.close();
 		}
@@ -54,7 +58,7 @@ public class CustomerDaoImpl implements CustomerDao{
 			em.merge(customer);
 			em.getTransaction().commit();
 		}catch(Exception e){
-			
+			logger.error(e.getMessage());
 		}finally{
 			em.close();
 		}	
@@ -70,7 +74,7 @@ public class CustomerDaoImpl implements CustomerDao{
 		try{
 			customer = em.find(Customer.class, id);
 		}catch(Exception e){
-			
+			logger.error(e.getMessage());
 		}finally{
 			em.close();
 		}
