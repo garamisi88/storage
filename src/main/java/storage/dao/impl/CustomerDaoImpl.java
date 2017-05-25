@@ -8,7 +8,7 @@ import storage.datasource.Utils;
 import storage.model.Customer;
 
 /**
- * A {@link storage.model.CustomerDao} intérfészt implementáló osztály.
+ * A {@link storage.dao.CustomerDao} intérfészt implementáló osztály.
  * @author Misi
  *
  */

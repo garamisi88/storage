@@ -129,8 +129,10 @@ public class App extends Application {
 		primaryStage.show();
 	}
 	
+	
 	/**
-	 * Az alkalmazás fő nézetét betöltő metódus.
+	 * Az alkalmazás nézeteit betöltő metódus.
+	 * @param viewFile a nézet fxml fájl neve
 	 */
 	public void changeView(String viewFile){
 		try{

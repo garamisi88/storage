@@ -64,39 +64,39 @@ public class StorageInitialization {
 		ProductDaoImpl productDao = new ProductDaoImpl();
 		CustomerDaoImpl customerDao = new CustomerDaoImpl();
 		MyOrder order = new MyOrder();
-		
-		
+
+
 		Customer customer = customerDao.get(1);
 		order.setCustomer(customer);
-		
+
 		order.setOrderDate(LocalDate.of(2017, 5, 5));
-		
+
 		Product product = productDao.get(1);
 		List<OrderItem> items = new LinkedList<OrderItem>();
-		
+
 		OrderItem item = new OrderItem();
 		item.setOrder(order);
 		item.setProduct(product);
 		item.setPrice(100);
 		item.setQuantity(2);
-		
+
 		items.add(item);
-		
+
 		order.setOrderItems(items);
-		
+
 		dao.save(order);
 
 	}
 
 	public static void setCustomer() {
 		CustomerDaoImpl dao = new CustomerDaoImpl();
-		
+
 		Customer customer = new Customer("Gara Mihály", "garamisi88@gmail.com", "+36301234567");
 		Address address = new Address("4024", "Debrecen", "Sumen utca 16", "Magyarország");
 		customer.setAddress(address);
-		
+
 		dao.save(customer);
-		
-		
+
+
 	}
 }

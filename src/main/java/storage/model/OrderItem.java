@@ -20,18 +20,18 @@ public class OrderItem{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="item_id")
-	private int id; 
-	
+	private int id;
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id")
 	private MyOrder order;
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="product_id")
 	private Product product;
-	
+
 	private int quantity;
-	
+
 	private float price;
 
 	public int getId() {
@@ -41,8 +41,8 @@ public class OrderItem{
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
+
+
 	public MyOrder getOrder() {
 		return order;
 	}
@@ -51,7 +51,7 @@ public class OrderItem{
 		this.order = order;
 	}
 
-	
+
 	public Product getProduct() {
 		return product;
 	}
@@ -75,6 +75,6 @@ public class OrderItem{
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	
-	
+
+
 }
