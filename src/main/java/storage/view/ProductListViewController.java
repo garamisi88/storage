@@ -129,4 +129,15 @@ public class ProductListViewController {
 			App.getInstance().showProductFormView("ProductFormView", productTable.getItems().get(index));
 		}
 	}
+	
+	@FXML
+	private void deleteButtonAction(){
+		int index = productTable.getSelectionModel().getSelectedIndex();
+		if(index >= 0){
+			Product product = productTable.getItems().get(index);
+			System.out.println("db törles");
+			productTable.getItems().remove(index);
+			
+		}
+	}
 }
