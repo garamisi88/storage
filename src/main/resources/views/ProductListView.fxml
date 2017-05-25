@@ -1,29 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="storage.view.ProductListViewController">
 	<top>
 		<fx:include fx:id="mainMenu" source="MainMenuView.fxml" />
 	</top>
    <center>
-      <SplitPane dividerPositions="0.6321070234113713" prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.5016722408026756" prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="282.0">
                <children>
                   <TableView fx:id="productTable" layoutY="35.0" prefHeight="398.0" prefWidth="374.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="nameCol" prefWidth="75.0" text="Termék neve" />
-                      <TableColumn fx:id="skuCol" prefWidth="75.0" text="Raktározási szám" />
+                      <TableColumn fx:id="nameCol" prefWidth="83.0" text="Termék neve" />
+                      <TableColumn fx:id="skuCol" prefWidth="92.0" text="Raktározási szám" />
+                        <TableColumn fx:id="quantityCol" minWidth="0.0" prefWidth="50.0" text="Mennyiség" />
+                        <TableColumn fx:id="priceCol" prefWidth="75.0" text="Alapár" />
+                        <TableColumn fx:id="expiryCol" prefWidth="75.0" text="Lejárati dátum" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="312.0">
+               <children>
+                  <GridPane layoutX="47.0" layoutY="44.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="60.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="128.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="136.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Termék neve" />
+                        <Label text="Raktározási szám" GridPane.rowIndex="1" />
+                        <Label text="Készlet" GridPane.rowIndex="4" />
+                        <Label fx:id="nameLabel" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="skuLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="priceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Minimum készlet" GridPane.rowIndex="5" />
+                        <Label text="Optimális készlet" GridPane.rowIndex="6" />
+                        <Label text="Lejárati dátum" GridPane.rowIndex="7" />
+                        <Label text="Alapár" GridPane.rowIndex="2" />
+                        <Label text="Eladási ár" GridPane.rowIndex="3" />
+                        <Label fx:id="sellPriceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="quantityLabel" text="Label" textFill="#c50b0b" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="minQuantityLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="optQuantityLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="expiryLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                     </children>
+                  </GridPane>
+                  <Label layoutX="14.0" layoutY="14.0" style="-fx-font-weight: 700;" text="Termék adatai" />
+                  <ButtonBar layoutX="79.0" layoutY="344.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                    <buttons>
+                        <Button mnemonicParsing="false" onAction="#addButtonAction" text="Új" />
+                        <Button mnemonicParsing="false" onAction="#editButtonAction" text="Módosít" />
+                      <Button mnemonicParsing="false" text="Töröl" />
+                    </buttons>
+                  </ButtonBar>
+               </children></AnchorPane>
         </items>
       </SplitPane>
    </center>

@@ -9,6 +9,10 @@ import storage.model.Product;
  * @author gara.mihaly
  *
  */
+/**
+ * @author Misi
+ *
+ */
 public interface ProductService {
 	
 	/**
@@ -49,4 +53,12 @@ public interface ProductService {
 	 * @return {@link storage.model.Product} objecktumok listája
 	 */
 	List<Product> getAll();
+	
+	
+	/**
+	 * A függvény megállítja, hogy rendelésre szorul-e a termék.
+	 * @param product A {@link storage.model.Product} osztály egy példánya
+	 * @return boolean Rendelésre szorul-e a termék
+	 */
+	boolean needToOrder(Product product);
 }

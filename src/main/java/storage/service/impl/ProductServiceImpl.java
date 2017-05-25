@@ -70,11 +70,22 @@ public class ProductServiceImpl implements ProductService{
 		return (float) (product.getPrice() * multiplier);
 	}
 
+	/* (non-Javadoc)
+	 * @see storage.service.ProductService#getAll()
+	 */
 	@Override
 	public List<Product> getAll() {
 		ProductDaoImpl dao = new ProductDaoImpl();
 		List<Product> list = dao.getAll();
 		
 		return list;
+	}
+
+	/* (non-Javadoc)
+	 * @see storage.service.ProductService#needToOrder(storage.model.Product)
+	 */
+	@Override
+	public boolean needToOrder(Product product) {
+		return (product.getMinimumQuantity() > 0 && product.getQuantity() < product.getMinimumQuantity()) || product.getQuantity() == 0;
 	}
 }

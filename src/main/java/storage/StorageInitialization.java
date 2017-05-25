@@ -69,7 +69,7 @@ public class StorageInitialization {
 		Customer customer = customerDao.get(1);
 		order.setCustomer(customer);
 		
-		order.setOrderDate(LocalDate.of(2017, 5, 4));
+		order.setOrderDate(LocalDate.of(2017, 5, 5));
 		
 		Product product = productDao.get(1);
 		List<OrderItem> items = new LinkedList<OrderItem>();
