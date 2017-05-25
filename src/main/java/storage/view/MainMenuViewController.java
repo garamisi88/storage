@@ -26,4 +26,9 @@ public class MainMenuViewController {
 	private void openProductList(){
 		App.getInstance().changeView("ProductListView");
 	}
+	
+	@FXML
+	private void openProductForm(){
+		App.getInstance().changeView("ProductFormView");
+	}
 }
