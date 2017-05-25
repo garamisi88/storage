@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +47,7 @@ public class Customer {
 	@Embedded
 	private Address address;
 
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy="customer", fetch=FetchType.EAGER)
 	private List<MyOrder> orders;
 	/**
 	 * Az osztály paraméter nélküli konstruktora.
@@ -144,6 +145,22 @@ public class Customer {
 	 */
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	/**
+	 * A vásárló korábbi rendelései visszadó metódus.
+	 * @return rendelések listja
+	 */
+	public List<MyOrder> getOrders() {
+		return orders;
+	}
+
+	/**
+	 * A vásárló korábbi rendeléseit visszaadó metódus.
+	 * @param orders rendelések listája
+	 */
+	public void setOrders(List<MyOrder> orders) {
+		this.orders = orders;
 	}
 	
 	

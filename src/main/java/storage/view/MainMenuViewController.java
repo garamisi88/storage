@@ -19,16 +19,25 @@ public class MainMenuViewController {
 	
 	@FXML
 	private void openOrderList(){
-		App.getInstance().changeView("OrderListView");
+		this.loadAppView("OrderListView");
 	}
 	
 	@FXML
 	private void openProductList(){
-		App.getInstance().changeView("ProductListView");
+		this.loadAppView("ProductListView");
 	}
 	
 	@FXML
 	private void openProductForm(){
 		App.getInstance().showProductFormView("ProductFormView", null);
+	}
+	
+	@FXML
+	private void openCustomerList(){
+		this.loadAppView("CustomerListView");
+	}
+	
+	private void loadAppView(String viewName){
+		App.getInstance().changeView(viewName);
 	}
 }

@@ -1,5 +1,7 @@
 package storage.dao;
 
+import java.util.List;
+
 import storage.model.Customer;
 
 /**
@@ -27,4 +29,10 @@ public interface CustomerDao {
 	 * @return Ha van találat a {@link storage.model.Customer} megfelelő példánya, ha nincs NULL érték
 	 */
 	Customer get(int id);
+	
+	/**
+	 * Visszaadja az összes vásárlót.
+	 * @return Vásárlókat tartalmazó lista
+	 */
+	List<Customer> getAll();
 }

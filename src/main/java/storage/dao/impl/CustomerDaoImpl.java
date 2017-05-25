@@ -1,7 +1,10 @@
 package storage.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,6 +86,23 @@ public class CustomerDaoImpl implements CustomerDao{
 			em.close();
 		}
 		return customer;
+	}
+
+	@Override
+	public List<Customer> getAll() {
+		EntityManager em = emf.createEntityManager();
+		List<Customer> list = null;
+		
+		try{
+			TypedQuery<Customer> query = em.createQuery("select c from Customer c", Customer.class);
+			list = query.getResultList();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}finally{
+			em.close();
+		}
+		
+		return list;
 	}
 
 }

@@ -19,7 +19,8 @@
     </Menu>
     <Menu mnemonicParsing="false" text="Vásárlók">
       <items>
-        <MenuItem mnemonicParsing="false" text="About" />
+        <MenuItem mnemonicParsing="false" onAction="#openCustomerList" text="Vásárlók listája" />
+            <MenuItem mnemonicParsing="false" text="Új vásárló rögzítése" />
       </items>
     </Menu>
   </menus>
