@@ -17,7 +17,11 @@ import storage.model.Customer;
  */
 public class CustomerDaoImpl implements CustomerDao{
 
+	/**
+	 * Az osztályon belül történő események naplózását végző Logger osztály.
+	 */
 	private Logger logger = LoggerFactory.getLogger(CustomerDaoImpl.class);
+	
 	/**
 	 * Az osztály EntityManagerFactory-ja, amelytől az EntityManager származni fog.
 	 */

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="storage.view.ProductFormViewController">
 	<top>
 		<fx:include fx:id="menuBar" source="MainMenuView.fxml" />
 	</top>
@@ -29,19 +29,20 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="nameInput" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <TextField maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="skuInput" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="priceInput" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="quantityInput" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="minQuantityInput" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="optQuantityInput" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="expiryDateInput" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label text="Termék neve" GridPane.rowIndex="1" />
             <Label text="Raktározási szám" GridPane.rowIndex="2" />
             <Label text="Alapár" GridPane.rowIndex="3" />
@@ -50,6 +51,11 @@
             <Label text="Optimális készlet" GridPane.rowIndex="6" />
             <Label text="Lejárati dátum" GridPane.rowIndex="7" />
             <Label text="Termék feltöltése" GridPane.columnIndex="1" />
+            <Label fx:id="errorLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets left="15.0" right="15.0" />
+               </GridPane.margin>
+            </Label>
          </children>
          <BorderPane.margin>
             <Insets left="15.0" right="15.0" />
@@ -59,8 +65,8 @@
    <bottom>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <buttons>
-          <Button mnemonicParsing="false" text="Mentés" />
-            <Button mnemonicParsing="false" text="Button" />
+          <Button mnemonicParsing="false" onAction="#saveAction" text="Mentés" />
+            <Button mnemonicParsing="false" onAction="#cancelAction" text="Mégse" />
         </buttons>
          <BorderPane.margin>
             <Insets />

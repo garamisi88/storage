@@ -11,7 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import storage.datasource.Utils;
+import storage.model.Product;
 import storage.model.User;
+import storage.view.ProductFormViewController;
 
 
  /**
@@ -60,7 +62,6 @@ public class App extends Application {
 	 * @param args parancssori argunemtumok
 	 */
 	public static void main(String[] args) {
-		
 		logger.info("Elindult az alkalmazás!");
 		StorageInitialization.setUser();
 		logger.info("Inicializálásra kerültek a userek.");
@@ -155,6 +156,27 @@ public class App extends Application {
 			view = (BorderPane)loader.load();
 			Scene scene = new Scene(view);
 			primaryStage.setScene(scene);
+			primaryStage.show();
+			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
+			
+		}catch(IOException e){
+			logger.error(e.getMessage());
+		}
+	}
+	
+	public void showProductFormView(String viewFile, Product product){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(App.class.getResource("/views/"+viewFile+".fxml"));
+			
+			view = (BorderPane)loader.load();
+			((ProductFormViewController)loader.getController()).setProduct(product);
+			
+			Scene scene = new Scene(view);
+			primaryStage.setScene(scene);
+			
+			
+			
 			primaryStage.show();
 			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
 			

@@ -19,8 +19,9 @@ public class ProductServiceImpl implements ProductService{
 	 * @see storage.service.ProductService#save(storage.model.Product)
 	 */
 	@Override
-	public void save(Product product) throws Exception {
+	public void save(Product product) throws IllegalArgumentException {
 		if(validateProduct(product)){
+			System.out.println("elvileg szuper");
 			ProductDaoImpl dao = new ProductDaoImpl();
 			dao.save(product);
 		}
@@ -30,7 +31,7 @@ public class ProductServiceImpl implements ProductService{
 	 * @see storage.service.ProductService#update(storage.model.Product)
 	 */
 	@Override
-	public void update(Product product) throws Exception {
+	public void update(Product product) throws IllegalArgumentException {
 		if(validateProduct(product)){
 			ProductDaoImpl dao = new ProductDaoImpl();
 			dao.update(product);
@@ -41,17 +42,17 @@ public class ProductServiceImpl implements ProductService{
 	 * @see storage.service.ProductService#validateProduct(storage.model.Product)
 	 */
 	@Override
-	public boolean validateProduct(Product product) throws Exception {
-		if(product.getName().trim().isEmpty())
-			throw new Exception("A név kitöltése kötelező!");
-		if(product.getSku().trim().isEmpty())
-			throw new Exception("A raktározási szám megadása kötelező!");
+	public boolean validateProduct(Product product) throws IllegalArgumentException {
+		if(product.getName() == null || product.getName().trim().isEmpty())
+			throw new IllegalArgumentException("A név kitöltése kötelező!");
+		if(product.getSku() == null || product.getSku().trim().isEmpty())
+			throw new IllegalArgumentException("A raktározási szám megadása kötelező!");
 		if(product.getPrice() <= 0)
-			throw new Exception("A termék árának nullánál nagyobbnak kell lennie!");
+			throw new IllegalArgumentException("A termék árának nullánál nagyobbnak kell lennie!");
 		if(product.getQuantity() < 1)
-			throw new Exception("A mennyiség értéke csak nullánál nagyobb egész szám lehet!");
+			throw new IllegalArgumentException("A mennyiség értéke csak nullánál nagyobb egész szám lehet!");
 		
-		return false;
+		return true;
 	}
 
 	/* (non-Javadoc)
@@ -60,13 +61,18 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public float getSellPrice(Product product) {
 		double multiplier = 1;
-		LocalDate currentDate = LocalDate.now();
-		int days = (int) Duration.between(currentDate.atTime(0, 0), product.getExpiryDate().atTime(0, 0)).toDays();
-		if(days >= 0 && days <= 3){
-			multiplier = 0.4;
-		}else if (days <= 7){
-			multiplier = 0.7;
+		if(product.getExpiryDate() != null) {
+			LocalDate currentDate = LocalDate.now();
+			int days = (int) Duration.between(currentDate.atTime(0, 0), product.getExpiryDate().atTime(0, 0)).toDays();
+			if(days >= 0 && days <= 3){
+				multiplier = 0.4;
+			}else if (days > 3 && days <= 7){
+				multiplier = 0.7;
+			}else if (days == 0){
+				multiplier = 0;
+			}
 		}
+		
 		return (float) (product.getPrice() * multiplier);
 	}
 
@@ -86,6 +92,9 @@ public class ProductServiceImpl implements ProductService{
 	 */
 	@Override
 	public boolean needToOrder(Product product) {
-		return (product.getMinimumQuantity() > 0 && product.getQuantity() < product.getMinimumQuantity()) || product.getQuantity() == 0;
+		if(product.getMinimumQuantity() == 0)
+			return false;
+		
+		return (product.getMinimumQuantity() > 0 && product.getQuantity() < product.getMinimumQuantity());
 	}
 }

@@ -17,17 +17,17 @@
 		<fx:include fx:id="mainMenu" source="MainMenuView.fxml" />
 	</top>
    <center>
-      <SplitPane dividerPositions="0.5016722408026756" prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.6003344481605352" prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="282.0">
                <children>
-                  <TableView fx:id="productTable" layoutY="35.0" prefHeight="398.0" prefWidth="374.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="productTable" layoutY="35.0" prefHeight="398.0" prefWidth="519.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="nameCol" prefWidth="83.0" text="Termék neve" />
-                      <TableColumn fx:id="skuCol" prefWidth="92.0" text="Raktározási szám" />
-                        <TableColumn fx:id="quantityCol" minWidth="0.0" prefWidth="50.0" text="Mennyiség" />
-                        <TableColumn fx:id="priceCol" prefWidth="75.0" text="Alapár" />
-                        <TableColumn fx:id="expiryCol" prefWidth="75.0" text="Lejárati dátum" />
+                      <TableColumn fx:id="nameCol" prefWidth="110.0" text="Termék neve" />
+                      <TableColumn fx:id="skuCol" prefWidth="133.0" text="Raktározási szám" />
+                        <TableColumn fx:id="quantityCol" minWidth="0.0" prefWidth="86.0" text="Mennyiség" />
+                        <TableColumn fx:id="priceCol" prefWidth="72.0" text="Alapár" />
+                        <TableColumn fx:id="expiryCol" prefWidth="115.0" text="Lejárati dátum" />
                     </columns>
                   </TableView>
                </children>

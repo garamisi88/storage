@@ -21,23 +21,23 @@ public interface ProductService {
 	 * @param product A menteni kívánt {@link storage.model.Product} objektum
 	 * @throws Exception Ha nem menthető a termék, a hiba okát továbbdobja a hívó metódusnak
 	 */
-	void save(Product product) throws Exception;
+	void save(Product product) throws IllegalArgumentException;
 	
 	/**
 	 * A termék módosítását végző függvény.
 	 * <p>Először megállapítja a {@link storage.service.ProductService#validateProduct(Product)} metódus segítségével, hogy módosítható-e az adott termék. Amennyiben igen, a {@link storage.dao.impl.ProductDaoImpl} osztály módosítja a terméket</p>
 	 * @param product A módosítani kívánt {@link storage.model.Product} objektum
-	 * @throws Exception Ha nem menthető a termék, a hiba okát továbbdobja a hívó függvények
+	 * @throws IllegalArgumentException Ha nem menthető a termék, a hiba okát továbbdobja a hívó függvények
 	 */
-	void update(Product product) throws Exception;
+	void update(Product product) throws IllegalArgumentException;
 	
 	/**
 	 * Ez a metóddus vizsgálja meg, hogy menthető-e a {@link storage.model.Product} objektum.
 	 * @param product Validálandó {@link storage.model.Product}
 	 * @return boolean Menhető-e a termék
-	 * @throws Exception Ha nem menthető a termék, a hiba okát tartalmazó exception-t dob a függvény
+	 * @throws IllegalArgumentException Ha nem menthető a termék, a hiba okát tartalmazó exception-t dob a függvény
 	 */
-	boolean validateProduct(Product product) throws Exception;
+	boolean validateProduct(Product product) throws IllegalArgumentException;
 	
 	/**
 	 * A termék eladási árát visszaadó metódus.

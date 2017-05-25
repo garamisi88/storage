@@ -105,7 +105,8 @@ public class ProductListViewController {
 			quantityLabel.setText(product.getQuantity()+" db");
 			minQuantityLabel.setText(product.getMinimumQuantity()+" db");
 			optQuantityLabel.setText(product.getOptimalQuantity()+" db");
-			expiryLabel.setText(product.getExpiryDate().format(DateTimeFormatter.ISO_DATE));
+			if(product.getExpiryDate() != null)
+				expiryLabel.setText(product.getExpiryDate().format(DateTimeFormatter.ISO_DATE));
 			
 			if(productService.needToOrder(product)){
 				quantityLabel.setTextFill(Color.web("#c50b0b"));
@@ -117,13 +118,15 @@ public class ProductListViewController {
 	
 	@FXML
 	private void addButtonAction(){
-		System.out.println("Add");
-		App.getInstance().changeView("ProductFormView");
+		App.getInstance().showProductFormView("ProductFormView", null);
 	}
 	
 	@FXML
 	private void editButtonAction(){
-		System.out.println("edit");
-		App.getInstance().changeView("ProductFormView");
+		int index = productTable.getSelectionModel().getSelectedIndex();
+		if(index >= 0){
+			Product product = productTable.getItems().get(index);
+			App.getInstance().showProductFormView("ProductFormView", productTable.getItems().get(index));
+		}
 	}
 }
