@@ -18,7 +18,7 @@ import storage.model.Customer;
  *
  */
 public class CustomerListViewController {
-	
+
 	/**
 	 * Vásárlókat tartalmazó lista.
 	 */

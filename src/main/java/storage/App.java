@@ -63,7 +63,7 @@ public class App extends Application {
 	 * az alkalmazás belépési pontja.
 	 * @param args parancssori argunemtumok
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		logger.info("Elindult az alkalmazás!");
 		StorageInitialization.setUser();
 		logger.info("Inicializálásra kerültek a userek.");
@@ -177,8 +177,6 @@ public class App extends Application {
 			Scene scene = new Scene(view);
 			primaryStage.setScene(scene);
 			
-			
-			
 			primaryStage.show();
 			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
 			
@@ -193,9 +191,8 @@ public class App extends Application {
 			loader.setLocation(App.class.getResource("/views/"+viewFile+".fxml"));
 			
 			view = (BorderPane)loader.load();
-			System.out.println("itt is");
 			((CustomerFormViewController)loader.getController()).setCustomer(customer);
-			System.out.println("es itt?");
+			
 			Scene scene = new Scene(view);
 			primaryStage.setScene(scene);
 			
