@@ -11,8 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import storage.datasource.Utils;
+import storage.model.Customer;
 import storage.model.Product;
 import storage.model.User;
+import storage.view.CustomerFormViewController;
 import storage.view.ProductFormViewController;
 
 
@@ -181,6 +183,29 @@ public class App extends Application {
 			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
 			
 		}catch(IOException e){
+			logger.error(e.getMessage());
+		}
+	}
+	
+	public void showCustomerFormView(String viewFile, Customer customer){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(App.class.getResource("/views/"+viewFile+".fxml"));
+			
+			view = (BorderPane)loader.load();
+			System.out.println("itt is");
+			((CustomerFormViewController)loader.getController()).setCustomer(customer);
+			System.out.println("es itt?");
+			Scene scene = new Scene(view);
+			primaryStage.setScene(scene);
+			
+			
+			
+			primaryStage.show();
+			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
+			
+		}catch(IOException e){
+			e.printStackTrace();
 			logger.error(e.getMessage());
 		}
 	}

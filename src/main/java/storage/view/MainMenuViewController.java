@@ -37,6 +37,11 @@ public class MainMenuViewController {
 		this.loadAppView("CustomerListView");
 	}
 	
+	@FXML
+	private void openCustomerForm(){
+		App.getInstance().showCustomerFormView("CustomerFormView", null);
+	}
+	
 	private void loadAppView(String viewName){
 		App.getInstance().changeView(viewName);
 	}

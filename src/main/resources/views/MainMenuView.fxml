@@ -20,7 +20,7 @@
     <Menu mnemonicParsing="false" text="Vásárlók">
       <items>
         <MenuItem mnemonicParsing="false" onAction="#openCustomerList" text="Vásárlók listája" />
-            <MenuItem mnemonicParsing="false" text="Új vásárló rögzítése" />
+            <MenuItem mnemonicParsing="false" onAction="#openCustomerForm" text="Új vásárló rögzítése" />
       </items>
     </Menu>
   </menus>
