@@ -44,6 +44,7 @@ public class CustomerDaoImpl implements CustomerDao{
 	public void save(Customer customer) {
 		EntityManager em = emf.createEntityManager();
 		try{
+			System.out.println(customer.getName());
 			em.getTransaction().begin();
 			em.persist(customer);
 			em.getTransaction().commit();

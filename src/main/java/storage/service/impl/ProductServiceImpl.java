@@ -15,15 +15,18 @@ import storage.service.ProductService;
  */
 public class ProductServiceImpl implements ProductService{
 
+	/**
+	 * Az osztály {@link storage.dao.impl.ProductDaoImpl} objektuma, amely az adatbázis műveleteket végzi.
+	 */
+	private final static ProductDaoImpl productDao = new ProductDaoImpl();
+	
 	/* (non-Javadoc)
 	 * @see storage.service.ProductService#save(storage.model.Product)
 	 */
 	@Override
 	public void save(Product product) throws IllegalArgumentException {
 		if(validateProduct(product)){
-			System.out.println("elvileg szuper");
-			ProductDaoImpl dao = new ProductDaoImpl();
-			dao.save(product);
+			productDao.save(product);
 		}
 	}
 
@@ -33,8 +36,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void update(Product product) throws IllegalArgumentException {
 		if(validateProduct(product)){
-			ProductDaoImpl dao = new ProductDaoImpl();
-			dao.update(product);
+			productDao.update(product);
 		}
 	}
 
@@ -81,8 +83,7 @@ public class ProductServiceImpl implements ProductService{
 	 */
 	@Override
 	public List<Product> getAll() {
-		ProductDaoImpl dao = new ProductDaoImpl();
-		List<Product> list = dao.getAll();
+		List<Product> list = productDao.getAll();
 		
 		return list;
 	}

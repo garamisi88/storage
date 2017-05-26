@@ -1,6 +1,10 @@
 package storage.service.impl;
 
+import java.util.List;
+
+import storage.dao.impl.OrderDaoImpl;
 import storage.model.MyOrder;
+import storage.model.OrderItem;
 import storage.service.OrderService;
 
 /**
@@ -10,12 +14,14 @@ import storage.service.OrderService;
  */
 public class OrderServiceImpl implements OrderService{
 
+	private final static OrderDaoImpl orderDao = new OrderDaoImpl();
 	/* (non-Javadoc)
 	 * @see storage.service.OrderService#save(storage.model.MyOrder)
 	 */
 	@Override
 	public void save(MyOrder order) throws Exception {
-		// TODO Auto-generated method stub
+		if( validateOrder(order) )
+			orderDao.save(order);
 		
 	}
 
@@ -24,8 +30,8 @@ public class OrderServiceImpl implements OrderService{
 	 */
 	@Override
 	public void update(MyOrder order) throws Exception {
-		// TODO Auto-generated method stub
-		
+		if( validateOrder(order) )
+			orderDao.update(order);
 	}
 
 	/* (non-Javadoc)
@@ -35,6 +41,30 @@ public class OrderServiceImpl implements OrderService{
 	public boolean validateOrder(MyOrder order) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public float getOrderSum(MyOrder order) {
+		float price = 0;
+		System.out.println(order.getOrderItems().size()+" db");
+		if(order.getOrderItems().size() > 0){
+			for (OrderItem item : order.getOrderItems()) {
+				price += item.getQuantity() * item.getPrice();
+			}
+		}
+		return price;
+	}
+
+	@Override
+	public List<MyOrder> getAll(String type) {
+		List<MyOrder> orders = null;
+		
+		switch( type ){
+			default:
+				orders = orderDao.getAll();
+		}
+		
+		return orders;
 	}
 
 }

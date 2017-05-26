@@ -162,6 +162,12 @@ public class Customer {
 	public void setOrders(List<MyOrder> orders) {
 		this.orders = orders;
 	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address="
+				+ address + ", orders=" + orders + "]";
+	}
 	
 	
 	

@@ -1,5 +1,7 @@
 package storage.service;
 
+import java.util.List;
+
 import storage.model.MyOrder;
 import storage.model.Product;
 
@@ -33,4 +35,19 @@ public interface OrderService {
 	 * @throws Exception Ha nem menthető a rendelés, a hiba okát tartalmazó exception-t dob a függvény
 	 */
 	boolean validateOrder(MyOrder order) throws Exception;
+	
+	/**
+	 * Ez a metódus adja vissza a rendelés végösszegét.
+	 * @param order A {@link storage.model.MyOrder} objektum, amelynek a végösszegét tudni akarjuk.
+	 * @return A rendelés végösszege
+	 */
+	float getOrderSum(MyOrder order);
+	
+	/**
+	 * Vissza adja az összes rendelés. 
+	 * <p>A függvény paraméterben várja, hogy milyen listára van szükségünk.</p>
+	 * @param type String paraméter, amely arra utal, hogy a dao melyik függvényét hívja
+	 * @return Rendelések listája
+	 */
+	List<MyOrder> getAll(String type);
 }

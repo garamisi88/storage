@@ -18,6 +18,12 @@ public interface OrderDao {
 	void save(MyOrder order);
 	
 	/**
+	 * A rendelés módosítását végző függvény.
+	 * @param order A rendelés objektum
+	 */
+	void update(MyOrder order);
+	
+	/**
 	 * Visszaadja az összes rendelést.
 	 * @return Rendelések listája
 	 */

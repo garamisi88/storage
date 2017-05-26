@@ -70,7 +70,7 @@ public class StorageInitialization {
 		order.setCustomer(customer);
 
 		order.setOrderDate(LocalDate.of(2017, 5, 5));
-
+		order.setReferenceId("2017/0001");
 		Product product = productDao.get(1);
 		List<OrderItem> items = new LinkedList<OrderItem>();
 
@@ -81,6 +81,8 @@ public class StorageInitialization {
 		item.setQuantity(2);
 
 		items.add(item);
+		
+		System.out.println(items.size()+"db termék hozzáadva");
 
 		order.setOrderItems(items);
 

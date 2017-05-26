@@ -1,5 +1,7 @@
 package storage.service;
 
+import java.util.List;
+
 import storage.model.Customer;
 
 /**
@@ -13,5 +15,7 @@ public interface CustomerService {
 	
 	void update(Customer customer) throws IllegalArgumentException;
 	
-	void validateCustomer(Customer customer) throws IllegalArgumentException;
+	boolean validateCustomer(Customer customer) throws IllegalArgumentException;
+	
+	List<Customer> getAll();
 }

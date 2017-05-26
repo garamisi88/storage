@@ -68,4 +68,18 @@ public class OrderDaoImpl implements OrderDao {
 		}
 		return list;
 	}
+
+	@Override
+	public void update(MyOrder order) {
+		EntityManager em = emf.createEntityManager();
+		try{
+			em.getTransaction().begin();
+			em.merge(order);
+			em.getTransaction().commit();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}finally{
+			em.close();
+		}
+	}
 }

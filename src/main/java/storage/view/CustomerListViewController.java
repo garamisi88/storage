@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import storage.App;
 import storage.dao.impl.CustomerDaoImpl;
 import storage.model.Customer;
+import storage.service.impl.CustomerServiceImpl;
 
 /**
  * 
@@ -23,6 +24,8 @@ public class CustomerListViewController {
 	 * Vásárlókat tartalmazó lista.
 	 */
 	private ObservableList<Customer> customers = FXCollections.observableArrayList();
+	
+	private CustomerServiceImpl customerService = new CustomerServiceImpl();
 	
 	/**
 	 * Vásárlókat tartalmazó táblázat.
@@ -102,9 +105,8 @@ public class CustomerListViewController {
 	@FXML
 	private void initialize(){
 		this.resetFields();
-		CustomerDaoImpl customerDao = new CustomerDaoImpl();
 		
-		customers.addAll(customerDao.getAll());
+		customers.addAll(customerService.getAll());
 		customerTable.setItems(customers);
 		
 		nameCol.setCellValueFactory(new PropertyValueFactory<Customer, String>("name"));

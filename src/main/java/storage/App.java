@@ -73,6 +73,7 @@ public class App extends Application {
 		logger.info("Létrejött a vásárló.");
 		StorageInitialization.setOrder();
 		logger.info("Mentésre került az alap rendelés");
+		
 		launch(args);
 	}
 
@@ -162,6 +163,7 @@ public class App extends Application {
 			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
 			
 		}catch(IOException e){
+			e.printStackTrace();
 			logger.error(e.getMessage());
 		}
 	}
@@ -195,8 +197,6 @@ public class App extends Application {
 			
 			Scene scene = new Scene(view);
 			primaryStage.setScene(scene);
-			
-			
 			
 			primaryStage.show();
 			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");

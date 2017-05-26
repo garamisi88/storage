@@ -2,6 +2,8 @@ package storage.model;
 
 import java.time.LocalDate;
 import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,15 +27,17 @@ public class MyOrder {
 	@Column(name="order_id")
 	private int id;
 	
-	@OneToMany(mappedBy="order")
+	@OneToMany(mappedBy="order", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private Collection<OrderItem> orderItems;
 	
 	@Column(name="order_date")
 	private LocalDate orderDate;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="customer_id")
 	private Customer customer;
+	
+	private String referenceId;
 
 	public int getId() {
 		return id;
@@ -43,6 +47,15 @@ public class MyOrder {
 		this.id = id;
 	}
 	
+	
+	public String getReferenceId() {
+		return referenceId;
+	}
+
+	public void setReferenceId(String referenceId) {
+		this.referenceId = referenceId;
+	}
+
 	public Collection<OrderItem> getOrderItems() {
 		return orderItems;
 	}
