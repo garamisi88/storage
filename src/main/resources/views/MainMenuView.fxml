@@ -9,6 +9,7 @@
     <Menu mnemonicParsing="false" text="Rendelések">
       <items>
         <MenuItem fx:id="orderList" mnemonicParsing="false" onAction="#openOrderList" text="Rendelések listája" />
+            <MenuItem mnemonicParsing="false" onAction="#openOrderForm" text="Új rendelés rögzítése" />
       </items>
     </Menu>
     <Menu mnemonicParsing="false" text="Termékek">

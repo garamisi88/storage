@@ -54,10 +54,20 @@ public class ProductFormViewController {
 		errorLabel.setText("");
 	}
 
+	/**
+	 * A terméket visszaadó metódus.
+	 * @return A módosítandó termék.
+	 */
 	public Product getProduct() {
 		return product;
 	}
 
+	/**
+	 * A módosítandó terméket beállító metódus.
+	 * <p>Lehetőség van <code>NULL</code> érték megadására is.</p>
+	 * <p>A terméke adataival feltölti az input mezőket.</p>
+	 * @param product a módosítandó termék
+	 */
 	public void setProduct(Product product) {
 		if(product == null)
 			product = new Product();

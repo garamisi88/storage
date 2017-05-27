@@ -1,6 +1,7 @@
 package storage.view;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.hibernate.Hibernate;
 import org.slf4j.Logger;
@@ -62,7 +63,7 @@ public class OrderListViewController {
 	private void initialize(){
 		this.resetFields();
 		
-		orders.addAll(orderService.getAll("all"));
+		orders.addAll(orderService.getAll("active"));
 		
 		orderTable.setItems(orders);
 		
@@ -74,6 +75,7 @@ public class OrderListViewController {
 		referenceLabel.setText(order.getReferenceId());
 		nameLabel.setText(order.getCustomer().getName());
 		priceLabel.setText(orderService.getOrderSum(order)+" Ft");
+		dateLabel.setText( order.getOrderDate().format(DateTimeFormatter.ISO_DATE) );
 	}
 	
 	private void resetFields(){

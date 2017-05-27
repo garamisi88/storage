@@ -65,15 +65,22 @@ public class Product {
 	private LocalDate expiryDate;
 	
 	/**
-	 * Azok a rendelés tételek, amelyekben a termék szerepel.
+	 * Az osztály paraméter nélküli konstruktora.
 	 */
-	@OneToMany(mappedBy="product", fetch=FetchType.LAZY)
-	@Column(nullable=true)
-	private Collection<OrderItem> orderItems;
-
 	public Product() {
 	}
 	
+	/**
+	 * Az osztály paraméteres konstruktora.
+	 * @param id				A termék id-ja
+	 * @param sku				A termék raktározási száma
+	 * @param name				A termék neve
+	 * @param price				A termék alapára
+	 * @param quantity			A termékből készleten lévő mennyiség
+	 * @param optimalQuantity	A termék optimális készlete
+	 * @param minimumQuantity	A termék minimum készlete
+	 * @param expiryDate		A termék lejárati dátuma
+	 */
 	public Product(int id, String sku, String name, float price, int quantity, int optimalQuantity,
 			int minimumQuantity, LocalDate expiryDate) {
 		this.id = id;
@@ -216,21 +223,8 @@ public class Product {
 		this.expiryDate = expiryDate;
 	}
 	
-	
-	
-	public Collection<OrderItem> getOrderItems() {
-		return orderItems;
-	}
-
-	public void setOrderItems(Collection<OrderItem> orderItems) {
-		this.orderItems = orderItems;
-	}
-
 	@Override
 	public String toString() {
 		return this.name+" ("+this.sku+")";
 	}
-	
-	
-	
 }

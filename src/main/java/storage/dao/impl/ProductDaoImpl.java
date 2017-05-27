@@ -14,7 +14,7 @@ import storage.datasource.Utils;
 import storage.model.Product;
 
 /**
- * A Product DAO interfészt implementáló osztály
+ * A Product DAO interfészt implementáló osztály.
  * @author Misi
  *
  */

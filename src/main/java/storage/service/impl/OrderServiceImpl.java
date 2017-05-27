@@ -43,6 +43,9 @@ public class OrderServiceImpl implements OrderService{
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see storage.service.OrderService#getOrderSum(storage.model.MyOrder)
+	 */
 	@Override
 	public float getOrderSum(MyOrder order) {
 		float price = 0;
@@ -55,13 +58,23 @@ public class OrderServiceImpl implements OrderService{
 		return price;
 	}
 
+	/* (non-Javadoc)
+	 * @see storage.service.OrderService#getAll(java.lang.String)
+	 */
 	@Override
 	public List<MyOrder> getAll(String type) {
 		List<MyOrder> orders = null;
 		
 		switch( type ){
-			default:
+			case "all":
 				orders = orderDao.getAll();
+				break;
+			case "closed":
+				orders = orderDao.getClosedOrders();
+				break;
+			default:
+				orders = orderDao.getActiveOrders();
+				break;
 		}
 		
 		return orders;

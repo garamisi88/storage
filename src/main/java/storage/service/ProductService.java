@@ -19,7 +19,7 @@ public interface ProductService {
 	 * A termék mentését végző függvény.
 	 * <p>Először megállapítja a {@link storage.service.ProductService#validateProduct(Product)} metódus segítségével, hogy menthető-e az adott termék. Amennyiben igen, a {@link storage.dao.impl.ProductDaoImpl} osztály menti a terméket</p> 
 	 * @param product A menteni kívánt {@link storage.model.Product} objektum
-	 * @throws Exception Ha nem menthető a termék, a hiba okát továbbdobja a hívó metódusnak
+	 * @throws IllegalArgumentException Ha nem menthető a termék, a hiba okát továbbdobja a hívó metódusnak
 	 */
 	void save(Product product) throws IllegalArgumentException;
 	

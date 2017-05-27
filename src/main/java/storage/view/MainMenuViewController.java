@@ -23,6 +23,11 @@ public class MainMenuViewController {
 	}
 	
 	@FXML
+	private void openOrderForm(){
+		this.loadAppView("OrderFormView");
+	}
+	
+	@FXML
 	private void openProductList(){
 		this.loadAppView("ProductListView");
 	}

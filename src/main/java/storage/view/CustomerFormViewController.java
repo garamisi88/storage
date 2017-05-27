@@ -110,7 +110,7 @@ public class CustomerFormViewController {
 	
 	/**
 	 * A vásárlót beállító metódus.
-	 * @param customer
+	 * @param customer A módosítantó {@link storage.model.Customer} objektum
 	 */
 	public void setCustomer(Customer customer) {
 		this.customer = customer;

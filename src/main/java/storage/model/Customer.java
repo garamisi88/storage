@@ -22,6 +22,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class Customer {
 	
+	/**
+	 * A vásárló id-ja.
+	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -47,8 +50,12 @@ public class Customer {
 	@Embedded
 	private Address address;
 
+	/**
+	 * A vásárló rendeléseit tartalmazó lista. 
+	 */
 	@OneToMany(mappedBy="customer", fetch=FetchType.EAGER)
 	private List<MyOrder> orders;
+	
 	/**
 	 * Az osztály paraméter nélküli konstruktora.
 	 */
@@ -56,7 +63,7 @@ public class Customer {
 	}
 
 	/**
-	 * Az osztály paraméteres konstruktora
+	 * Az osztály paraméteres konstruktora.
 	 * @param name a megrendelő neve
 	 * @param email a megrendelő email címe
 	 * @param phone a megrendelő telefonszáma
@@ -163,6 +170,9 @@ public class Customer {
 		this.orders = orders;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address="

@@ -82,14 +82,15 @@ public class StorageInitialization {
 
 		items.add(item);
 		
-		System.out.println(items.size()+"db termék hozzáadva");
-
 		order.setOrderItems(items);
 
 		dao.save(order);
 
 	}
 
+	/**
+	 * Ez a metódus beszúrja az adatbázisba az első vásárlót.
+	 */
 	public static void setCustomer() {
 		CustomerDaoImpl dao = new CustomerDaoImpl();
 
