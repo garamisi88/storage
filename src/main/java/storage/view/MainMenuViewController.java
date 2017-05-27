@@ -24,7 +24,7 @@ public class MainMenuViewController {
 	
 	@FXML
 	private void openOrderForm(){
-		this.loadAppView("OrderFormView");
+		App.getInstance().showOrderFormView("OrderFormView", null);
 	}
 	
 	@FXML

@@ -175,8 +175,7 @@ public class Customer {
 	 */
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address="
-				+ address + ", orders=" + orders + "]";
+		return this.getName()+" ("+this.getEmail()+")";
 	}
 	
 	

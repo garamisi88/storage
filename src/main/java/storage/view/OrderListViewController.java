@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import storage.App;
 import storage.model.Customer;
 import storage.model.MyOrder;
 import storage.model.Product;
@@ -87,12 +88,14 @@ public class OrderListViewController {
 	
 	@FXML
 	private void addButtonAction(){
-		logger.info("uj gomb klikk");
+		App.getInstance().showOrderFormView("OrderFormView", null);
 	}
 	
 	@FXML
 	private void editButtonAction(){
-		logger.info("modosit gomb klikk");
+		int index = orderTable.getSelectionModel().getSelectedIndex();
+		if(index >= 0)
+			App.getInstance().showOrderFormView("OrderFormView", orderTable.getItems().get(index));
 	}
 	
 	@FXML

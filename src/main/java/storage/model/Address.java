@@ -113,6 +113,14 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("%s %s %s, %s", country, zip, city, street));
+		
+		return sb.toString();
+	}
 	
 	
 	

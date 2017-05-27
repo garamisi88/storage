@@ -12,9 +12,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import storage.datasource.Utils;
 import storage.model.Customer;
+import storage.model.MyOrder;
 import storage.model.Product;
 import storage.model.User;
 import storage.view.CustomerFormViewController;
+import storage.view.OrderFormViewController;
 import storage.view.ProductFormViewController;
 
 
@@ -136,12 +138,14 @@ public class App extends Application {
 	 */
 	public void changeView(String viewFile){
 		FXMLLoader loader = new FXMLLoader();
-		view = getView(viewFile, loader);
-		Scene scene = new Scene(view);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
+		loadView(viewFile, loader);
 		
+		if(view != null){
+			Scene scene = new Scene(view);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
+		}
 	}
 	
 	/**
@@ -151,14 +155,17 @@ public class App extends Application {
 	 */
 	public void showProductFormView(String viewFile, Product product){
 		FXMLLoader loader = new FXMLLoader();
-		view = getView(viewFile, loader);
-		((ProductFormViewController)loader.getController()).setProduct(product);
+		loadView(viewFile, loader);
 		
-		Scene scene = new Scene(view);
-		primaryStage.setScene(scene);
-		
-		primaryStage.show();
-		logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
+		if(view != null){
+			((ProductFormViewController)loader.getController()).setProduct(product);
+			
+			Scene scene = new Scene(view);
+			primaryStage.setScene(scene);
+			
+			primaryStage.show();
+			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
+		}
 	}
 	
 	/**
@@ -168,31 +175,47 @@ public class App extends Application {
 	 */
 	public void showCustomerFormView(String viewFile, Customer customer){
 		FXMLLoader loader = new FXMLLoader();
-		view = getView(viewFile, loader);
-		((CustomerFormViewController)loader.getController()).setCustomer(customer);
+		loadView(viewFile, loader);
 		
-		Scene scene = new Scene(view);
-		primaryStage.setScene(scene);
+		if(view != null){
+			((CustomerFormViewController)loader.getController()).setCustomer(customer);
+			
+			Scene scene = new Scene(view);
+			primaryStage.setScene(scene);
+			
+			primaryStage.show();
+			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
+		}
+	}
+	
+	public void showOrderFormView(String viewFile, MyOrder order){
+		FXMLLoader loader = new FXMLLoader();
+		loadView(viewFile, loader);
 		
-		primaryStage.show();
-		logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
+		if(view != null){
+			((OrderFormViewController)loader.getController()).setOrder(order);
+			Scene scene = new Scene(view);
+			primaryStage.setScene(scene);
+			
+			primaryStage.show();
+			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
+		}
 	}
 	
 	/**
 	 * A nézeteket betöltő metódus. 
 	 * @param fileName A nézet fxml fájl neve
 	 * @param loader Az FXMLLoader osztály egy példánya
-	 * @return BorderPane típusú nézet
 	 */
-	private BorderPane getView(String fileName, FXMLLoader loader){
+	private void loadView(String fileName, FXMLLoader loader){
 		loader.setLocation(App.class.getResource("/views/"+fileName+".fxml"));
+		
 		try {
-			view = (BorderPane)loader.load();
+			view = (BorderPane)loader.load();	
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
 		
-		return view;
 	}
 	
 	/**
