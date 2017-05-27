@@ -17,6 +17,8 @@
         <log4j.version>2.8.2</log4j.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<tinylog.version>1.2</tinylog.version>
+		<mockito.version>1.10.19</mockito.version>
+		<junit.version></junit.version>
     </properties>
 
     <developers>
@@ -81,6 +83,18 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>${junit.version}</scope>
 		</dependency>
     </dependencies>
 	<profiles>

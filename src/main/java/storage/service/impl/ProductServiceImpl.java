@@ -98,4 +98,12 @@ public class ProductServiceImpl implements ProductService{
 		
 		return (product.getMinimumQuantity() > 0 && product.getQuantity() < product.getMinimumQuantity());
 	}
+
+	/* (non-Javadoc)
+	 * @see storage.service.ProductService#get(int)
+	 */
+	@Override
+	public Product get(int id) {
+		return productDao.get(id);
+	}
 }

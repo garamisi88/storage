@@ -56,6 +56,13 @@ public interface ProductService {
 	
 	
 	/**
+	 * Visszadja a paraméterként kapott id-jú terméket.
+	 * @param id A termék id-ja
+	 * @return A kért termék
+	 */
+	Product get(int id);
+	
+	/**
 	 * A függvény megállítja, hogy rendelésre szorul-e a termék.
 	 * @param product A {@link storage.model.Product} osztály egy példánya
 	 * @return boolean Rendelésre szorul-e a termék
