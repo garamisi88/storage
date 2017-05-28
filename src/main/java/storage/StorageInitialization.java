@@ -37,7 +37,7 @@ public class StorageInitialization {
 		product.setQuantity(20);
 		product.setOptimalQuantity(70);
 		product.setMinimumQuantity(30);
-		product.setExpiryDate(LocalDate.of(2017, 5, 5));
+		product.setExpiryDate(LocalDate.of(2017, 5, 31));
 
 		dao.save(product);
 	}
@@ -83,7 +83,7 @@ public class StorageInitialization {
 		items.add(item);
 		
 		order.setOrderItems(items);
-
+		order.setPrice(200);
 		dao.save(order);
 
 	}

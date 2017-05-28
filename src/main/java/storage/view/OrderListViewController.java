@@ -40,13 +40,13 @@ public class OrderListViewController {
 	private TableColumn<MyOrder, String> referenceCol;
 	
 	@FXML
-	private TableColumn<Customer, String> nameCol;
+	private TableColumn<MyOrder, String> nameCol;
 	
 	@FXML
 	private TableColumn<MyOrder, LocalDate> dateCol;
 	
 	@FXML
-	private TableColumn<OrderServiceImpl, Float> priceCol;
+	private TableColumn<MyOrder, Float> priceCol;
 	
 	@FXML
 	private Label referenceLabel;
@@ -69,13 +69,17 @@ public class OrderListViewController {
 		orderTable.setItems(orders);
 		
 		referenceCol.setCellValueFactory(new PropertyValueFactory<MyOrder, String>("referenceId"));
+		nameCol.setCellValueFactory(new PropertyValueFactory<MyOrder, String>("customer"));
+		dateCol.setCellValueFactory(new PropertyValueFactory<MyOrder, LocalDate>("orderDate"));
+		priceCol.setCellValueFactory(new PropertyValueFactory<MyOrder, Float>("price"));
+		
 		orderTable.getSelectionModel().selectedItemProperty().addListener((o, oldvalue, newvalue) -> showOrderDetails(newvalue));
 	}
 	
 	private void showOrderDetails(MyOrder order){
 		referenceLabel.setText(order.getReferenceId());
 		nameLabel.setText(order.getCustomer().getName());
-		priceLabel.setText(orderService.getOrderSum(order)+" Ft");
+		priceLabel.setText(orderService.getOrderSum(order.getOrderItems())+" Ft");
 		dateLabel.setText( order.getOrderDate().format(DateTimeFormatter.ISO_DATE) );
 	}
 	

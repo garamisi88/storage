@@ -61,6 +61,11 @@ public class MyOrder {
 	private boolean closed;
 
 	/**
+	 * A rendelés végösszege.
+	 */
+	private float price;
+	
+	/**
 	 * Rendelés id-ját visszaadó metódus.
 	 * @return A rendelés id-ja
 	 */
@@ -147,5 +152,42 @@ public class MyOrder {
 	 */
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	/**
+	 * Ez a metódus visszaadja, hoy teljesített-e a rendelés.
+	 * @return teljesített-e a rendelés
+	 */
+	public boolean isClosed() {
+		return closed;
+	}
+
+	
+	/**
+	 * Ez a metódosu állítja be, hogy zárt-e a rendelés. 
+	 * @param closed
+	 */
+	public void setClosed(boolean closed) {
+		this.closed = closed;
+	}
+
+	
+	/**
+	 * Ez a függvény adja vissza a rendelés végöszegét.
+	 * @return A rendelés végösszege
+	 */
+	public float getPrice() {
+		return price;
+	}
+
+	
+	/**
+	 * A rendelés végösszegét beállító metódus.
+	 * @param price a rendelés végösszege
+	 */
+	public void setPrice(float price) {
+		this.price = price;
 	}	
+	
+	
 }

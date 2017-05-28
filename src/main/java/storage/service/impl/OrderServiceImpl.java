@@ -1,5 +1,6 @@
 package storage.service.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import storage.dao.impl.OrderDaoImpl;
@@ -47,11 +48,11 @@ public class OrderServiceImpl implements OrderService{
 	 * @see storage.service.OrderService#getOrderSum(storage.model.MyOrder)
 	 */
 	@Override
-	public float getOrderSum(MyOrder order) {
+	public float getOrderSum(Collection<OrderItem> orderItems) {
 		float price = 0;
-		System.out.println(order.getOrderItems().size()+" db");
-		if(order.getOrderItems().size() > 0){
-			for (OrderItem item : order.getOrderItems()) {
+		
+		if(orderItems.size() > 0){
+			for (OrderItem item : orderItems) {
 				price += item.getQuantity() * item.getPrice();
 			}
 		}

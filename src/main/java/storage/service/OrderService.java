@@ -1,8 +1,10 @@
 package storage.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import storage.model.MyOrder;
+import storage.model.OrderItem;
 import storage.model.Product;
 
 /**
@@ -38,10 +40,10 @@ public interface OrderService {
 	
 	/**
 	 * Ez a metódus adja vissza a rendelés végösszegét.
-	 * @param order A {@link storage.model.MyOrder} objektum, amelynek a végösszegét tudni akarjuk.
+	 * @param orderItems A {@link storage.model.OrderItem} objektumokat tartalmazó kollekció.
 	 * @return A rendelés végösszege
 	 */
-	float getOrderSum(MyOrder order);
+	float getOrderSum(Collection<OrderItem> orderItems);
 	
 	/**
 	 * Vissza adja az összes rendelés. 

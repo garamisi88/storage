@@ -35,7 +35,7 @@ public class OrderItem{
 	/**
 	 * A tételhez tartozó termék. 
 	 */
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="product_id")
 	private Product product;
 
