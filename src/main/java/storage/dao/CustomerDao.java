@@ -24,6 +24,12 @@ public interface CustomerDao {
 	void update(Customer customer);
 	
 	/**
+	 * Törli a paraméterként kapott vásárlót az adatbázisból.
+	 * @param customer A törlendő vásárló
+	 */
+	void remove(Customer customer);
+	
+	/**
 	 * Visszaadja a paraméterben kapott id-hoz tartozó {@link storage.model.Customer} osztályt.
 	 * @param id a keresett vásárló
 	 * @return Ha van találat a {@link storage.model.Customer} megfelelő példánya, ha nincs NULL érték

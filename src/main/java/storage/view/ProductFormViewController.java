@@ -124,10 +124,7 @@ public class ProductFormViewController {
 		}catch(IllegalArgumentException e){
 			errorLabel.setText(e.getMessage());
 		}catch(Exception e){
-			e.printStackTrace();
-			System.out.println("itt kapom el a hibát");
-			System.out.println(e.getMessage());
-			//logger.error(e.getMessage());
+			logger.error(e.getMessage());
 		}
 	}
 	

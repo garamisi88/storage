@@ -188,6 +188,11 @@ public class App extends Application {
 		}
 	}
 	
+	/**
+	 * A rendelés módosító formot betöltő metódus.
+	 * @param viewFile A nézetfile neve
+	 * @param order A rendelés osztály egy példánya
+	 */
 	public void showOrderFormView(String viewFile, MyOrder order){
 		FXMLLoader loader = new FXMLLoader();
 		loadView(viewFile, loader);

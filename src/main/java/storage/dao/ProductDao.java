@@ -23,6 +23,12 @@ public interface ProductDao {
 	void update(Product product);
 	
 	/**
+	 * Termék törlését végző metódus.
+	 * @param product A törlendő termék
+	 */
+	void remove(Product product);
+	
+	/**
 	 * Visszaadja a paraméterként kapott id-hoz tartozó {@link storage.model.Product} osztály megfelelő példányát.
 	 * @param id a termék idja
 	 * @return {@link storage.model.Product} objektum
@@ -34,6 +40,13 @@ public interface ProductDao {
 	 * @return Termékek listája
 	 */
 	List<Product> getAll();
+	
+	
+	/**
+	 * Visszaadja az aktív termékeket.
+	 * @return Termékek listája
+	 */
+	List<Product> getActiveProducts();
 	
 	/**
 	 * Visszaadja azokat a termékek, amelyek rendelésre szorulnak.

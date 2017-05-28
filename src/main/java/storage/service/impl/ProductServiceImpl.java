@@ -70,24 +70,13 @@ public class ProductServiceImpl implements ProductService{
 				multiplier = 0.4;
 			}else if (days > 3 && days <= 7){
 				multiplier = 0.7;
-			}else if (days == 0){
-				multiplier = 0;
 			}
 		}
 		
 		return (float) (product.getPrice() * multiplier);
 	}
 
-	/* (non-Javadoc)
-	 * @see storage.service.ProductService#getAll()
-	 */
-	@Override
-	public List<Product> getAll() {
-		List<Product> list = productDao.getAll();
-		
-		return list;
-	}
-
+	
 	/* (non-Javadoc)
 	 * @see storage.service.ProductService#needToOrder(storage.model.Product)
 	 */
@@ -105,5 +94,31 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public Product get(int id) {
 		return productDao.get(id);
+	}
+
+	/* (non-Javadoc)
+	 * @see storage.service.ProductService#remove(storage.model.Product)
+	 */
+	@Override
+	public void remove(Product product) {
+		productDao.remove(product);
+	}
+
+	/* (non-Javadoc)
+	 * @see storage.service.ProductService#getAll(java.lang.String)
+	 */
+	@Override
+	public List<Product> getAll(String type) {
+		switch( type ){
+			case "waste":
+				return productDao.getWasteProducts();
+			case "orderable":
+				return productDao.getOrderableProducts();
+			case "all":
+				return productDao.getAll();
+			case "active":
+			default:
+				return productDao.getActiveProducts();
+		}
 	}
 }

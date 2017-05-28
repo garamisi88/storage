@@ -44,7 +44,6 @@ public class CustomerDaoImpl implements CustomerDao{
 	public void save(Customer customer) {
 		EntityManager em = emf.createEntityManager();
 		try{
-			System.out.println(customer.getName());
 			em.getTransaction().begin();
 			em.persist(customer);
 			em.getTransaction().commit();
@@ -89,6 +88,9 @@ public class CustomerDaoImpl implements CustomerDao{
 		return customer;
 	}
 
+	/* (non-Javadoc)
+	 * @see storage.dao.CustomerDao#getAll()
+	 */
 	@Override
 	public List<Customer> getAll() {
 		EntityManager em = emf.createEntityManager();
@@ -104,6 +106,24 @@ public class CustomerDaoImpl implements CustomerDao{
 		}
 		
 		return list;
+	}
+
+	/* (non-Javadoc)
+	 * @see storage.dao.CustomerDao#remove(storage.model.Customer)
+	 */
+	@Override
+	public void remove(Customer customer) {
+		EntityManager em = emf.createEntityManager();
+		
+		try{
+			em.getTransaction().begin();
+			em.remove(customer);
+			em.getTransaction().commit();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}finally{
+			em.close();
+		}
 	}
 
 }

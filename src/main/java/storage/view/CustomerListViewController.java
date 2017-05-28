@@ -8,7 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import storage.App;
-import storage.dao.impl.CustomerDaoImpl;
+
 import storage.model.Customer;
 import storage.service.impl.CustomerServiceImpl;
 
@@ -153,7 +153,6 @@ public class CustomerListViewController {
 	 */
 	@FXML
 	private void addCustomer(){
-		System.out.println("itt vagyok");
 		App.getInstance().showCustomerFormView("CustomerFormView", null);
 	}
 	
@@ -175,7 +174,9 @@ public class CustomerListViewController {
 	private void deleteCustomer(){
 		int index = customerTable.getSelectionModel().getSelectedIndex();
 		if(index >= 0){
-			System.out.println("torles");
+			Customer customer = customerTable.getItems().get(index);
+			customerTable.getItems().remove(index);
+			customerService.remove(customer);
 		}
 	}
 }

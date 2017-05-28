@@ -6,6 +6,7 @@ import java.util.List;
 import storage.dao.impl.OrderDaoImpl;
 import storage.model.MyOrder;
 import storage.model.OrderItem;
+import storage.model.Product;
 import storage.service.OrderService;
 
 /**
@@ -20,7 +21,7 @@ public class OrderServiceImpl implements OrderService{
 	 * @see storage.service.OrderService#save(storage.model.MyOrder)
 	 */
 	@Override
-	public void save(MyOrder order) throws Exception {
+	public void save(MyOrder order) throws IllegalArgumentException {
 		if( validateOrder(order) )
 			orderDao.save(order);
 		
@@ -30,18 +31,24 @@ public class OrderServiceImpl implements OrderService{
 	 * @see storage.service.OrderService#update(storage.model.MyOrder)
 	 */
 	@Override
-	public void update(MyOrder order) throws Exception {
-		if( validateOrder(order) )
+	public void update(MyOrder order) throws IllegalArgumentException {
+		if( validateOrder(order) ){
 			orderDao.update(order);
+		}
+			
 	}
 
 	/* (non-Javadoc)
 	 * @see storage.service.OrderService#validateOrder(storage.model.MyOrder)
 	 */
 	@Override
-	public boolean validateOrder(MyOrder order) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean validateOrder(MyOrder order) throws IllegalArgumentException {
+		if(order.getCustomer() == null)
+			throw new IllegalArgumentException("Válasszon vásárlót!");
+		if(order.getOrderItems().size() == 0)
+			throw new IllegalArgumentException("Nem rendelt terméket a rendeléshez!");
+		
+		return true;
 	}
 
 	/* (non-Javadoc)
@@ -64,21 +71,30 @@ public class OrderServiceImpl implements OrderService{
 	 */
 	@Override
 	public List<MyOrder> getAll(String type) {
-		List<MyOrder> orders = null;
-		
 		switch( type ){
 			case "all":
-				orders = orderDao.getAll();
-				break;
+				return orderDao.getAll();
 			case "closed":
-				orders = orderDao.getClosedOrders();
-				break;
+				return orderDao.getClosedOrders();
 			default:
-				orders = orderDao.getActiveOrders();
-				break;
+				return orderDao.getActiveOrders();
 		}
-		
-		return orders;
+	}
+
+	/* (non-Javadoc)
+	 * @see storage.service.OrderService#getProductCartQuantity(java.util.Collection, storage.model.Product)
+	 */
+	@Override
+	public int getProductCartQuantity(Collection<OrderItem> orderItems, Product product){
+		return orderItems.stream().filter(p -> p.getProduct().getId() == product.getId()).mapToInt(p -> p.getQuantity()).sum();
+	}
+
+	/* (non-Javadoc)
+	 * @see storage.service.OrderService#remove(storage.model.MyOrder)
+	 */
+	@Override
+	public void remove(MyOrder order) {
+		orderDao.remove(order);
 	}
 
 }

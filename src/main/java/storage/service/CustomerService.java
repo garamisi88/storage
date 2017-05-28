@@ -40,4 +40,10 @@ public interface CustomerService {
 	 * @return Vásárlókat tartalmazó lista
 	 */
 	List<Customer> getAll();
+	
+	/**
+	 * Törli az adatbázisból a paraméterként kapott vásárlót.
+	 * @param customer A törlendő vásárló
+	 */
+	void remove(Customer customer);
 }

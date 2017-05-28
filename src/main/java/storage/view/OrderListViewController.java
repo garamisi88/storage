@@ -1,9 +1,8 @@
 package storage.view;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,9 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import storage.App;
-import storage.model.Customer;
 import storage.model.MyOrder;
-import storage.model.Product;
 import storage.service.impl.OrderServiceImpl;
 
 /**
@@ -74,13 +71,18 @@ public class OrderListViewController {
 		priceCol.setCellValueFactory(new PropertyValueFactory<MyOrder, Float>("price"));
 		
 		orderTable.getSelectionModel().selectedItemProperty().addListener((o, oldvalue, newvalue) -> showOrderDetails(newvalue));
+		
+		logger.info("nézet inicializálva");
 	}
 	
 	private void showOrderDetails(MyOrder order){
-		referenceLabel.setText(order.getReferenceId());
-		nameLabel.setText(order.getCustomer().getName());
-		priceLabel.setText(orderService.getOrderSum(order.getOrderItems())+" Ft");
-		dateLabel.setText( order.getOrderDate().format(DateTimeFormatter.ISO_DATE) );
+		if(order != null){
+			referenceLabel.setText(order.getReferenceId());
+			nameLabel.setText(order.getCustomer().getName());
+			priceLabel.setText(orderService.getOrderSum(order.getOrderItems())+" Ft");
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			dateLabel.setText( formatter.format(order.getOrderDate()) );
+		}
 	}
 	
 	private void resetFields(){
@@ -104,6 +106,12 @@ public class OrderListViewController {
 	
 	@FXML
 	private void deleteButtonAction(){
-		logger.info("torol gomb klikk");
+		int index = orderTable.getSelectionModel().getSelectedIndex();
+		if(index >= 0){
+			MyOrder order = orderTable.getSelectionModel().getSelectedItem();
+			this.resetFields();
+			orderService.remove(order);
+			orderTable.getItems().remove(index);
+		}
 	}
 }

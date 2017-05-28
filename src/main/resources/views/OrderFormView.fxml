@@ -4,7 +4,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -83,6 +85,10 @@
                               <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
+                        <Label fx:id="priceLabel" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin></Label>
                      </children>
                   </GridPane>
                   <Label layoutX="14.0" layoutY="180.0" style="-fx-font-weight: 700;" text="Rendelés tételek" />
@@ -97,6 +103,13 @@
                       <TableColumn fx:id="quantityCol" prefWidth="89.0" text="Darab" />
                         <TableColumn fx:id="priceCol" prefWidth="125.0" text="Ár" />
                     </columns>
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#removeTableRow" text="Eltávolítás" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
                   </TableView>
                   <GridPane layoutY="344.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                     <columnConstraints>

@@ -74,7 +74,6 @@
                     <buttons>
                       <Button mnemonicParsing="false" onAction="#addCustomer" text="Új" />
                         <Button mnemonicParsing="false" onAction="#editCustomer" text="Módosít" />
-                        <Button mnemonicParsing="false" onAction="#deleteCustomer" text="Törlés" />
                     </buttons>
                   </ButtonBar>
                </children>

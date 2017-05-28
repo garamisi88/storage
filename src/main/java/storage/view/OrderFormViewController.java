@@ -1,5 +1,9 @@
 package storage.view;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +25,11 @@ import storage.service.impl.CustomerServiceImpl;
 import storage.service.impl.OrderServiceImpl;
 import storage.service.impl.ProductServiceImpl;
 
+/**
+ * A rendelés nézetet vezérlő controller osztály.
+ * @author Misi
+ *
+ */
 public class OrderFormViewController {
 	
 	private MyOrder order;
@@ -61,6 +70,9 @@ public class OrderFormViewController {
 	private Label quantityLabel;
 	
 	@FXML
+	private Label priceLabel;
+	
+	@FXML
 	private TextField quantityField;
 	
 	@FXML
@@ -84,16 +96,19 @@ public class OrderFormViewController {
 		emailLabel.setText("");
 		addressLabel.setText("");
 		summaryLabel.setText("");
+		priceLabel.setText("");
 		quantityLabel.setText("");
 		
 		customers.addAll(customerService.getAll());
-		products.addAll(productService.getAll());
+		products.addAll(productService.getAll("active"));
 		
 		customerSelect.setItems(customers);
 		productSelect.setItems(products);
 		
 		this.setFormValues();
 		this.setOrderTable();
+		
+		
 	}
 	
 	@FXML
@@ -102,6 +117,7 @@ public class OrderFormViewController {
 		if( product != null ){
 			priceField.setText(String.valueOf(productService.getSellPrice(product)));
 			quantityLabel.setText(" ("+product.getQuantity()+" db)");
+			priceLabel.setText(product.getPrice()+" Ft");
 		}
 	}
 	
@@ -112,17 +128,25 @@ public class OrderFormViewController {
 			if( product != null ){
 				int selectedQuantity = Integer.valueOf( quantityField.getText() );
 				float price = Float.valueOf( priceField.getText() );
+				int quantityInCart = orderService.getProductCartQuantity(orderItems, product);
 				
-				if( selectedQuantity > product.getQuantity() )
+				if( selectedQuantity == 0)
+					throw new IllegalArgumentException("Kérem adjon meg mennyiséget!");
+				
+				if( selectedQuantity + quantityInCart > product.getQuantity() )
 					throw new IllegalArgumentException("A termékből csak "+product.getQuantity()+" db van készleten!");
+				
 				
 				OrderItem item = new OrderItem();
 				item.setProduct(product);
 				item.setQuantity(selectedQuantity);
 				item.setPrice(price);
+				item.setOrder(order);
 				
 				orderItems.add(item);
 				summaryLabel.setText(orderService.getOrderSum(orderItems)+" Ft");
+				
+				quantityField.setText("");
 			}
 		}
 		catch(IllegalArgumentException e){
@@ -132,15 +156,31 @@ public class OrderFormViewController {
 			logger.error(e.getMessage());
 		}
 	}
-	
+	 
 	@FXML
 	private void changeCustomerAction(){
-		System.out.println("vevő választás");
+		Customer customer = getSelectedCustomer();
+		if(customer != null){
+			emailLabel.setText(customer.getEmail());
+			addressLabel.setText(customer.getAddress().toString());
+		}
 	}
 	
 	@FXML
 	private void saveOrderAction(){
-		System.out.println("mentés");
+		this.prepareOrder();
+		
+		try{
+			if(order.getId() == 0)
+				orderService.save(order);
+			else
+				orderService.update(order);
+			App.getInstance().changeView("OrderListView");
+		}catch(IllegalArgumentException e){
+			errorLabel.setText(e.getMessage());
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
 	}
 	
 	@FXML
@@ -150,17 +190,53 @@ public class OrderFormViewController {
 	
 	@FXML
 	private void closeOrderAction(){
-		System.out.println("Lezárás");
+		this.prepareOrder();
+		
+		try{
+			for (OrderItem item : order.getOrderItems()) {
+				int quantityInCart = orderService.getProductCartQuantity(order.getOrderItems(), item.getProduct());
+				if(quantityInCart > item.getProduct().getQuantity())
+					throw new IllegalArgumentException("A(z) "+item.getProduct().toString()+" elérhető készlet "+item.getProduct().getQuantity());
+			}
+			
+			order.setClosed(true);
+			if(order.getId() == 0)
+				orderService.save(order);
+			else
+				orderService.update(order);
+			
+			for (OrderItem item : order.getOrderItems()) {
+				Product product = item.getProduct();
+				product.setQuantity(product.getQuantity() - item.getQuantity());
+				productService.update(product);
+			}
+			
+			App.getInstance().changeView("OrderListView");
+		}catch(IllegalArgumentException e){
+			errorLabel.setText(e.getMessage());
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
 	}
 	
+	@FXML
+	private void removeTableRow(){
+		int index = orderItemTable.getSelectionModel().getSelectedIndex();
+		if(index >= 0){
+			orderItems.remove(index);
+			summaryLabel.setText(orderService.getOrderSum(orderItems)+" Ft");
+		}
+	}
+	
+	
 	private void setFormValues(){
-		if(order != null){
+		if(order != null && order.getId() != 0){
 			emailLabel.setText(order.getCustomer().getEmail());
 			addressLabel.setText(order.getCustomer().getAddress().toString());
 			summaryLabel.setText(orderService.getOrderSum(order.getOrderItems())+" Ft");
 			
 			if(customers.size() > 0 && customerSelect.getItems().size() > 0){
-				customerSelect.setValue(order.getCustomer());
+				customerSelect.getSelectionModel().select(order.getCustomer());
 			}
 			
 			orderItems.addAll(order.getOrderItems());
@@ -177,7 +253,13 @@ public class OrderFormViewController {
 		
 	}
 
+	/**
+	 * Ez a metódos állítja be a módosítandó rendelést.
+	 * @param order A módosítandó rendelés
+	 */
 	public void setOrder(MyOrder order) {
+		if(order == null)
+			order = new MyOrder();
 		this.order = order;
 		this.setFormValues();
 	}
@@ -191,5 +273,21 @@ public class OrderFormViewController {
 		return null;
 	}
 	
+	private Customer getSelectedCustomer(){
+		return customerSelect.getSelectionModel().getSelectedItem();
+	}
 	
+	private void prepareOrder(){
+		order.setCustomer( getSelectedCustomer() );
+		order.setOrderItems(orderItems);
+		order.setPrice(orderService.getOrderSum(orderItems));
+
+		if(order.getId() == 0){
+			Calendar calendar = Calendar.getInstance();
+			Date now = calendar.getTime();
+			int rand = new Random().nextInt(9) + 1;
+			order.setReferenceId(now.getTime() +"-"+rand);		
+			order.setOrderDate(now);
+		}
+	}
 }

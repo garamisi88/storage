@@ -1,7 +1,7 @@
 package storage.model;
 
-import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,7 +40,7 @@ public class MyOrder {
 	 * A rendelés ideje.
 	 */
 	@Column(name="order_date")
-	private LocalDate orderDate;
+	private Date orderDate;
 	
 	/**
 	 * A rendelés-t leadó felhasználó. A {@link storage.model.Customer} osztály egy példánya.
@@ -118,7 +118,7 @@ public class MyOrder {
 	 * A rendelés dátumát visszaadó metódus.
 	 * @return A rendelés dátuma
 	 */
-	public LocalDate getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
 
@@ -126,7 +126,7 @@ public class MyOrder {
 	 * A rendelés dátumát beállító metódus.
 	 * @param orderDate A rendelés dátuma
 	 */
-	public void setOrderDate(LocalDate orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 	
@@ -165,7 +165,7 @@ public class MyOrder {
 	
 	/**
 	 * Ez a metódosu állítja be, hogy zárt-e a rendelés. 
-	 * @param closed
+	 * @param closed zárt-e a rendelés
 	 */
 	public void setClosed(boolean closed) {
 		this.closed = closed;

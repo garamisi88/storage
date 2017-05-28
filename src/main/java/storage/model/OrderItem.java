@@ -1,5 +1,6 @@
 package storage.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,7 +36,7 @@ public class OrderItem{
 	/**
 	 * A tételhez tartozó termék. 
 	 */
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="product_id")
 	private Product product;
 

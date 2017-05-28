@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import storage.dao.OrderDao;
 import storage.datasource.Utils;
 import storage.model.MyOrder;
-import storage.model.Product;
 
 /**
  * Az {@link storage.dao.OrderDao} interfészt implementáló osztály.

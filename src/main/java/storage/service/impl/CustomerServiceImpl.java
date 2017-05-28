@@ -57,13 +57,22 @@ public class CustomerServiceImpl implements CustomerService {
 		if(customer.getAddress().getStreet() == null || customer.getAddress().getStreet().trim().isEmpty())
 			throw new IllegalArgumentException("Az utca, házszám mező kitöltése kötelező!");
 		
-		
-		
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see storage.service.CustomerService#getAll()
+	 */
 	@Override
 	public List<Customer> getAll() {
 		return customerDao.getAll();
+	}
+
+	/* (non-Javadoc)
+	 * @see storage.service.CustomerService#remove(storage.model.Customer)
+	 */
+	@Override
+	public void remove(Customer customer) {
+		customerDao.remove(customer);
 	}
 }

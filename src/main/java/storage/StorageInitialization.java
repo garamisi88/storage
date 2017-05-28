@@ -1,8 +1,11 @@
 package storage;
 
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -37,7 +40,7 @@ public class StorageInitialization {
 		product.setQuantity(20);
 		product.setOptimalQuantity(70);
 		product.setMinimumQuantity(30);
-		product.setExpiryDate(LocalDate.of(2017, 5, 31));
+		product.setExpiryDate(LocalDate.now().plusDays(4));
 
 		dao.save(product);
 	}
@@ -66,11 +69,17 @@ public class StorageInitialization {
 		MyOrder order = new MyOrder();
 
 
+			
 		Customer customer = customerDao.get(1);
 		order.setCustomer(customer);
+		
+		Calendar calendar = Calendar.getInstance();
+		Date now = calendar.getTime();
+		int rand = new Random().nextInt(9) + 1;
+		order.setReferenceId(now.getTime() +"-"+rand);	
 
-		order.setOrderDate(LocalDate.of(2017, 5, 5));
-		order.setReferenceId("2017/0001");
+		order.setOrderDate(now);
+		
 		Product product = productDao.get(1);
 		List<OrderItem> items = new LinkedList<OrderItem>();
 

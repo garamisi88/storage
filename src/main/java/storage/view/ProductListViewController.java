@@ -2,6 +2,7 @@ package storage.view;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,8 @@ import storage.service.impl.ProductServiceImpl;
  *
  */
 public class ProductListViewController {
+	
+	private static final ProductServiceImpl productService = new ProductServiceImpl();
 	
 	@FXML
 	private TableView<Product> productTable;
@@ -70,17 +73,19 @@ public class ProductListViewController {
 	private void initialize(){
 		this.resetFields();
 		
-		ProductServiceImpl productService = new ProductServiceImpl();
-		productList.addAll(productService.getAll());
-		productTable.setItems(productList);
-		
-		nameCol.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-		skuCol.setCellValueFactory(new PropertyValueFactory<Product, String>("sku"));
-		quantityCol.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
-		priceCol.setCellValueFactory(new PropertyValueFactory<Product, Float>("price"));
-		expiryCol.setCellValueFactory(new PropertyValueFactory<Product, LocalDate>("expiryDate"));
-		
-		productTable.getSelectionModel().selectedItemProperty().addListener((o, oldvalue, newvalue) -> showProductDetails(newvalue));
+		List<Product> products = productService.getAll("active");
+		if(products != null && products.size() > 0){
+			productList.addAll(products);
+			productTable.setItems(productList);
+			
+			nameCol.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+			skuCol.setCellValueFactory(new PropertyValueFactory<Product, String>("sku"));
+			quantityCol.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
+			priceCol.setCellValueFactory(new PropertyValueFactory<Product, Float>("price"));
+			expiryCol.setCellValueFactory(new PropertyValueFactory<Product, LocalDate>("expiryDate"));
+			
+			productTable.getSelectionModel().selectedItemProperty().addListener((o, oldvalue, newvalue) -> showProductDetails(newvalue));
+		}
 	}
 	
 	private void resetFields(){
@@ -96,7 +101,7 @@ public class ProductListViewController {
 	
 	private void showProductDetails(Product product){
 		if(product != null){
-			ProductServiceImpl productService = new ProductServiceImpl();
+			
 			
 			nameLabel.setText(product.getName());
 			skuLabel.setText(product.getSku());
@@ -126,7 +131,7 @@ public class ProductListViewController {
 		int index = productTable.getSelectionModel().getSelectedIndex();
 		if(index >= 0){
 			Product product = productTable.getItems().get(index);
-			App.getInstance().showProductFormView("ProductFormView", productTable.getItems().get(index));
+			App.getInstance().showProductFormView("ProductFormView", product);
 		}
 	}
 	
@@ -134,9 +139,11 @@ public class ProductListViewController {
 	private void deleteButtonAction(){
 		int index = productTable.getSelectionModel().getSelectedIndex();
 		if(index >= 0){
-			Product product = productTable.getItems().get(index);
-			System.out.println("db törles");
+			this.resetFields();
+			Product product = productTable.getSelectionModel().getSelectedItem();
+			productService.remove(product);
 			productTable.getItems().remove(index);
+			
 			
 		}
 	}

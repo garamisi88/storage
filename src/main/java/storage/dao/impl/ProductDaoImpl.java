@@ -145,4 +145,43 @@ public class ProductDaoImpl implements ProductDao{
 		return product;
 	}
 
+
+	/* (non-Javadoc)
+	 * @see storage.dao.ProductDao#remove(storage.model.Product)
+	 */
+	@Override
+	public void remove(Product product) {
+		EntityManager em = emf.createEntityManager();
+		
+		try{em.getTransaction().begin();
+			em.remove(product);
+			em.getTransaction().commit();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}finally{
+			em.close();
+		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see storage.dao.ProductDao#getActiveProducts()
+	 */
+	@Override
+	public List<Product> getActiveProducts() {
+		EntityManager em = emf.createEntityManager();
+		List<Product> list = null;
+		
+		try{
+			TypedQuery<Product> query = em.createQuery("select p from Product p where p.expiryDate >= now() or p.expiryDate IS NULL", Product.class);
+			list = query.getResultList();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}finally{
+			em.close();
+		}
+		
+		return list;
+	}
+
 }

@@ -32,6 +32,12 @@ public interface ProductService {
 	void update(Product product) throws IllegalArgumentException;
 	
 	/**
+	 * Törli az a {@link storage.dao.impl.ProductDaoImpl} osztályon keresztül a terméket az adatbázisból.
+	 * @param product a törlendő termék
+	 */
+	void remove(Product product);
+	
+	/**
 	 * Ez a metóddus vizsgálja meg, hogy menthető-e a {@link storage.model.Product} objektum.
 	 * @param product Validálandó {@link storage.model.Product}
 	 * @return boolean Menhető-e a termék
@@ -49,10 +55,11 @@ public interface ProductService {
 	float getSellPrice(Product product);
 	
 	/**
-	 * Visszaadja az összes terméket.
+	 * Visszaadja a paraméternek megfelelő termékeket.
+	 * @param type melyik listát adja vissza a metódus
 	 * @return {@link storage.model.Product} objecktumok listája
 	 */
-	List<Product> getAll();
+	List<Product> getAll(String type);
 	
 	
 	/**
