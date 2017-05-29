@@ -23,11 +23,11 @@ public class CustomerServiceTest {
 		
 		customerDao = Mockito.mock(CustomerDaoImpl.class);
 		
-		Customer customer = new Customer("Kiss Pista", "kiss.pista@teszt.hu", "+36301231231");
+		Customer customer = new Customer("Kiss Pista", "kiss.pista@teszt.hu", "+36301234567");
 		Address address = new Address("4024", "Debrecen", "Sumen utca", "Magyarország");
 		customer.setAddress(address);
 		
-		Customer customer2 = new Customer("Kiss Pista Béla", "kiss.pista.bela@teszt.hu", "+36301231231");
+		Customer customer2 = new Customer("Kiss Pista Béla", "kiss.pista.bela@teszt.hu", "+36301234567");
 		
 		Mockito.when(customerDao.get(1)).thenReturn(customer);
 		Mockito.when(customerDao.get(2)).thenReturn(customer2);
@@ -56,6 +56,20 @@ public class CustomerServiceTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void emptyAddress(){
 		customerService.validateCustomer(customerDao.get(2));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void invalidEmail(){
+		Customer customer = customerDao.get(1);
+		customer.setEmail("teszt");
+		customerService.validateCustomer(customer);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void invalidPhone(){
+		Customer customer = customerDao.get(1);
+		customer.setPhone("12312312312");
+		customerService.validateCustomer(customer);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)

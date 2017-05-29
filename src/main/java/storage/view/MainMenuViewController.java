@@ -23,6 +23,11 @@ public class MainMenuViewController {
 	}
 	
 	@FXML
+	private void openClosedOrders(){
+		this.loadAppView("ClosedOrderList");
+	}
+	
+	@FXML
 	private void openOrderForm(){
 		App.getInstance().showOrderFormView("OrderFormView", null);
 	}

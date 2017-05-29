@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600" prefWidth="800" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="storage.view.ClosedOrderViewController">
+	<top>
+		<fx:include fx:id="mainMenu" source="MainMenuView.fxml" />
+	</top>
+   <center>
+      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" fx:id="orderTable">
+        <columns>
+          <TableColumn fx:id="referenceCol" prefWidth="176.0" text="Megrendelés száma" />
+          <TableColumn fx:id="customerCol" minWidth="0.0" prefWidth="284.0" text="Megrendelő" />
+            <TableColumn fx:id="priceCol" prefWidth="154.0" text="Összeg" />
+            <TableColumn fx:id="dateCol" prefWidth="185.0" text="Rendelés ideje" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

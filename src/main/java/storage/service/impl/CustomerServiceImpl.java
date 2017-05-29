@@ -1,6 +1,7 @@
 package storage.service.impl;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import storage.dao.impl.CustomerDaoImpl;
 import storage.model.Customer;
@@ -56,6 +57,15 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		if(customer.getAddress().getStreet() == null || customer.getAddress().getStreet().trim().isEmpty())
 			throw new IllegalArgumentException("Az utca, házszám mező kitöltése kötelező!");
+		
+		Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		
+		if(!pattern.matcher(customer.getEmail()).matches())
+			throw new IllegalArgumentException("Az e-mail cím formátuma nem megfelelő!");
+		
+		Pattern patternPhone = Pattern.compile("^(\\+)+(\\d{10}|\\d{11})");
+		if(!patternPhone.matcher(customer.getPhone()).matches())
+			throw new IllegalArgumentException("A telefonszám formátuma nem megfelelő! Helyes formátum +361234567");
 		
 		return true;
 	}
