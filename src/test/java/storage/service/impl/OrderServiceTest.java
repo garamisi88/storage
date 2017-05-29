@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.mockito.Mockito;
 import storage.dao.OrderDao;
 import storage.dao.ProductDao;
 import storage.dao.impl.OrderDaoImpl;
+import storage.datasource.Utils;
 import storage.model.Customer;
 import storage.model.MyOrder;
 import storage.model.OrderItem;
@@ -24,7 +26,7 @@ public class OrderServiceTest {
 	private OrderDao orderDao;
 	
 	private ProductDao productDao;
-
+	
 	@Before
 	public void setUp(){
 		orderService = new OrderServiceImpl();
@@ -90,7 +92,7 @@ public class OrderServiceTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void failedSaveEmptyCustomer(){
-		orderService.save(orderDao.get(2));
+		orderService.update(orderDao.get(2));
 	}
 	
 	@Test
@@ -107,4 +109,10 @@ public class OrderServiceTest {
 	public void checkQuantity(){
 		Assert.assertEquals(5, orderService.getProductCartQuantity(orderDao.get(2).getOrderItems(), productDao.get(1)));
 	}
+	
+	@After
+	public void closeConnection(){
+		Utils.connectionClose();
+	}
+	
 }
