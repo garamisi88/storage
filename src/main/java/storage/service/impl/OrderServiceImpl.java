@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService{
 	public boolean validateOrder(MyOrder order) throws IllegalArgumentException {
 		if(order.getCustomer() == null)
 			throw new IllegalArgumentException("Válasszon vásárlót!");
-		if(order.getOrderItems().size() == 0)
+		if(order.getOrderItems() == null || order.getOrderItems().size() == 0)
 			throw new IllegalArgumentException("Nem rendelt terméket a rendeléshez!");
 		
 		return true;
