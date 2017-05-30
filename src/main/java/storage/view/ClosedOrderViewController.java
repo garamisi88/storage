@@ -13,6 +13,11 @@ import storage.App;
 import storage.model.MyOrder;
 import storage.model.OrderItem;
 
+/**
+ * A lezárt rendelés adatait megjelenítő nézetért felelős controller osztály.
+ * @author Misi
+ *
+ */
 public class ClosedOrderViewController {
 	
 	private MyOrder order;
@@ -90,7 +95,7 @@ public class ClosedOrderViewController {
 	
 	/**
 	 * Ez a metódus állítja be a megjelenítendő rendelést.
-	 * @param order
+	 * @param order a megtekinteni kívánt rendelés
 	 */
 	public void setOrder(MyOrder order) {
 		this.order = order;

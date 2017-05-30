@@ -13,6 +13,11 @@ import storage.App;
 import storage.model.MyOrder;
 import storage.service.impl.OrderServiceImpl;
 
+/**
+ * A lezárt rendeléseket megjelenítő lista nézetért felelős controller.
+ * @author Misi
+ *
+ */
 public class ClosedOrderListController {
 	
 	private static final OrderServiceImpl orderService = new OrderServiceImpl();

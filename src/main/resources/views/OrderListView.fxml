@@ -24,7 +24,7 @@
                <children>
                   <TableView fx:id="orderTable" layoutX="-21.0" layoutY="50.0" prefHeight="398.0" prefWidth="301.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="referenceCol" prefWidth="132.0" text="Rendelés szám" />
+                      <TableColumn fx:id="referenceCol" prefWidth="132.0" text="Rendelésszám" />
                       <TableColumn fx:id="nameCol" prefWidth="143.0" text="Megrendelő neve" />
                         <TableColumn fx:id="priceCol" prefWidth="124.0" text="Végösszeg" />
                         <TableColumn fx:id="dateCol" prefWidth="139.0" text="Rendelés dátum" />
@@ -47,7 +47,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Rendelés szám" />
+                        <Label text="Rendelésszám" />
                         <Label text="Megrendelő" GridPane.rowIndex="1" />
                         <Label text="Végösszeg" GridPane.rowIndex="2" />
                         <Label text="Megrendelés ideje" GridPane.rowIndex="3" />
