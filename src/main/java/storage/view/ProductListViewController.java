@@ -25,6 +25,8 @@ public class ProductListViewController {
 	
 	private static final ProductServiceImpl productService = new ProductServiceImpl();
 	
+	private String listType = null;
+	
 	@FXML
 	private TableView<Product> productTable;
 	
@@ -50,6 +52,9 @@ public class ProductListViewController {
 	private Label skuLabel;
 	
 	@FXML
+	private Label entryPriceLabel;
+	
+	@FXML
 	private Label priceLabel;
 	
 	@FXML
@@ -72,25 +77,12 @@ public class ProductListViewController {
 	@FXML
 	private void initialize(){
 		this.resetFields();
-		
-		List<Product> products = productService.getAll("active");
-		if(products != null && products.size() > 0){
-			productList.addAll(products);
-			productTable.setItems(productList);
-			
-			nameCol.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-			skuCol.setCellValueFactory(new PropertyValueFactory<Product, String>("sku"));
-			quantityCol.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
-			priceCol.setCellValueFactory(new PropertyValueFactory<Product, Float>("price"));
-			expiryCol.setCellValueFactory(new PropertyValueFactory<Product, LocalDate>("expiryDate"));
-			
-			productTable.getSelectionModel().selectedItemProperty().addListener((o, oldvalue, newvalue) -> showProductDetails(newvalue));
-		}
 	}
 	
 	private void resetFields(){
 		nameLabel.setText("");
 		skuLabel.setText("");
+		entryPriceLabel.setText("");
 		priceLabel.setText("");
 		sellPriceLabel.setText("");
 		quantityLabel.setText("");
@@ -105,6 +97,7 @@ public class ProductListViewController {
 			
 			nameLabel.setText(product.getName());
 			skuLabel.setText(product.getSku());
+			entryPriceLabel.setText(product.getEntryPrice()+" Ft");
 			priceLabel.setText(product.getPrice()+" Ft");
 			sellPriceLabel.setText(productService.getSellPrice(product)+" Ft");
 			quantityLabel.setText(product.getQuantity()+" db");
@@ -147,4 +140,31 @@ public class ProductListViewController {
 			
 		}
 	}
+
+	/**
+	 * A lista típusát beállító változó
+	 * @param listType a lista típusa
+	 */
+	public void setListType(String listType) {
+		this.listType = listType;
+		this.loadTable();
+	}
+	
+	private void loadTable(){
+		List<Product> products = productService.getAll( this.listType );
+		if(products != null && products.size() > 0){
+			productList.addAll(products);
+			productTable.setItems(productList);
+			
+			nameCol.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+			skuCol.setCellValueFactory(new PropertyValueFactory<Product, String>("sku"));
+			quantityCol.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
+			priceCol.setCellValueFactory(new PropertyValueFactory<Product, Float>("price"));
+			expiryCol.setCellValueFactory(new PropertyValueFactory<Product, LocalDate>("expiryDate"));
+			
+			productTable.getSelectionModel().selectedItemProperty().addListener((o, oldvalue, newvalue) -> showProductDetails(newvalue));
+		}
+	}
+	
+	
 }

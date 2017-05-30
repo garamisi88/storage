@@ -16,7 +16,9 @@
     <Menu mnemonicParsing="false" text="Termékek">
       <items>
         <MenuItem mnemonicParsing="false" onAction="#openProductList" text="Termékek listája" />
-            <MenuItem mnemonicParsing="false" onAction="#openProductForm" text="Új termék rögzítése" />
+        <MenuItem mnemonicParsing="false" onAction="#openOrderableProductList" text="Rendelendő termékek listája" />
+        <MenuItem mnemonicParsing="false" onAction="#openWasteProductList" text="Selejt termékek listája" />
+        <MenuItem mnemonicParsing="false" onAction="#openProductForm" text="Új termék rögzítése" />
       </items>
     </Menu>
     <Menu mnemonicParsing="false" text="Vásárlók">

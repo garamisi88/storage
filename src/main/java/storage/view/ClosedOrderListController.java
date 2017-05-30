@@ -58,6 +58,6 @@ public class ClosedOrderListController {
 	private void viewOrderAction(){
 		MyOrder order = orderTable.getSelectionModel().getSelectedItem();
 		if(order != null)
-			App.getInstance().showClosedOrderDatas("ClosedOrderView", order);
+			App.getInstance().showOrderFormView("ClosedOrderView", order);
 	}
 }

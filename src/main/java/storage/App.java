@@ -19,15 +19,13 @@ import storage.view.ClosedOrderViewController;
 import storage.view.CustomerFormViewController;
 import storage.view.OrderFormViewController;
 import storage.view.ProductFormViewController;
+import storage.view.ProductListViewController;
+import storage.view.WasteProductViewController;
 
 
  /**
  * Az alkalmazás fő controllere.
  * @author Misi
- */
-/**
- * @author Misi
- *
  */
 public class App extends Application {
 	
@@ -142,9 +140,7 @@ public class App extends Application {
 		loadView(viewFile, loader);
 		
 		if(view != null){
-			Scene scene = new Scene(view);
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			this.showView();
 			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
 		}
 	}
@@ -159,12 +155,28 @@ public class App extends Application {
 		loadView(viewFile, loader);
 		
 		if(view != null){
-			((ProductFormViewController)loader.getController()).setProduct(product);
+			switch( viewFile ){
+				case "ProductFormView":
+					((ProductFormViewController)loader.getController()).setProduct(product);
+					break;
+				case "WasteProductView":
+					((WasteProductViewController)loader.getController()).setProduct(product);
+					break;
+			}
 			
-			Scene scene = new Scene(view);
-			primaryStage.setScene(scene);
+			this.showView();
+			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
+		}
+	}
+	
+	public void showProductListView(String viewFile, String type){
+		FXMLLoader loader = new FXMLLoader();
+		loadView(viewFile, loader);
+		
+		if(view != null){
+			((ProductListViewController)loader.getController()).setListType(type);
 			
-			primaryStage.show();
+			this.showView();
 			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
 		}
 	}
@@ -174,23 +186,19 @@ public class App extends Application {
 	 * @param viewFile 	A nézet fájl neve
 	 * @param customer	A módosítandó {@link storage.model.Customer} objektum
 	 */
-	public void showCustomerFormView(String viewFile, Customer customer){
+	public void showCustomerFormView(String viewFile, Object customer){
 		FXMLLoader loader = new FXMLLoader();
 		loadView(viewFile, loader);
 		
 		if(view != null){
-			((CustomerFormViewController)loader.getController()).setCustomer(customer);
-			
-			Scene scene = new Scene(view);
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
+			((CustomerFormViewController)loader.getController()).setCustomer((Customer)customer);
+			this.showView();
 			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
 		}
 	}
 	
 	/**
-	 * A rendelés módosító formot betöltő metódus.
+	 * A rendelés módosító formot betöltő metódus, illetve a lezárt rendeléseket is ez a függvény jeleníti meg.
 	 * @param viewFile A nézetfile neve
 	 * @param order A rendelés osztály egy példánya
 	 */
@@ -199,30 +207,16 @@ public class App extends Application {
 		loadView(viewFile, loader);
 		
 		if(view != null){
-			((OrderFormViewController)loader.getController()).setOrder(order);
-			Scene scene = new Scene(view);
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
+			switch( viewFile ){
+				case "OrderFormView":
+					((OrderFormViewController)loader.getController()).setOrder(order);
+					break;
+				case "ClosedOrderView":
+					((ClosedOrderViewController)loader.getController()).setOrder(order);
+					break;
+			}
+			this.showView();
 			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
-		}
-	}
-	
-	/**
-	 * A lezárt rendeléseket megjelenítő metódus.
-	 * @param viewFile A nézetfájl neve
-	 * @param order A megtekinteni kívánt rendelés
-	 */
-	public void showClosedOrderDatas(String viewFile, MyOrder order){
-		FXMLLoader loader = new FXMLLoader();
-		loadView(viewFile, loader);
-		
-		if(view != null){
-			((ClosedOrderViewController)loader.getController()).setOrder(order);
-			Scene scene = new Scene(view);
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
 		}
 	}
 	
@@ -238,8 +232,17 @@ public class App extends Application {
 			view = (BorderPane)loader.load();	
 		} catch (IOException e) {
 			logger.error(e.getMessage());
-		}
+		}	
+	}
+	
+	/**
+	 * Ez a metódus állítja be a stage-en a korábban betöltött nézetet. 
+	 */
+	private void showView(){
+		Scene scene = new Scene(view);
+		primaryStage.setScene(scene);
 		
+		primaryStage.show();
 	}
 	
 	/**

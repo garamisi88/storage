@@ -34,7 +34,17 @@ public class MainMenuViewController {
 	
 	@FXML
 	private void openProductList(){
-		this.loadAppView("ProductListView");
+		App.getInstance().showProductListView("ProductListView", "active");
+	}
+	
+	@FXML
+	private void openOrderableProductList(){
+		App.getInstance().showProductListView("ProductListView", "orderable");
+	} 
+	
+	@FXML
+	private void openWasteProductList(){
+		this.loadAppView("WasteProductList");
 	}
 	
 	@FXML

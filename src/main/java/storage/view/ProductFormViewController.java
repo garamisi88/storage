@@ -31,6 +31,9 @@ public class ProductFormViewController {
 	private TextField skuInput;
 	
 	@FXML
+	private TextField entryPriceInput;
+	
+	@FXML
 	private TextField priceInput;
 	
 	@FXML
@@ -75,6 +78,7 @@ public class ProductFormViewController {
 		
 		nameInput.setText(this.product.getName());
 		skuInput.setText(this.product.getSku());
+		entryPriceInput.setText(String.valueOf(this.product.getEntryPrice()));
 		priceInput.setText(String.valueOf(this.product.getPrice()));
 		quantityInput.setText(String.valueOf(this.product.getQuantity()));
 		minQuantityInput.setText(String.valueOf(this.product.getMinimumQuantity()));
@@ -86,7 +90,7 @@ public class ProductFormViewController {
 	
 	@FXML
 	private void cancelAction(){
-		App.getInstance().changeView("ProductListView");
+		App.getInstance().showProductListView("ProductListView", "active");
 	}
 	
 	@FXML
@@ -98,6 +102,9 @@ public class ProductFormViewController {
 			
 			if(skuInput.getText() != null && !skuInput.getText().isEmpty())
 				product.setSku( skuInput.getText() );
+			
+			if(entryPriceInput.getText() != null && !entryPriceInput.getText().isEmpty())
+				product.setEntryPrice( Float.valueOf( entryPriceInput.getText() ));
 			
 			if(priceInput.getText() != null && !priceInput.getText().isEmpty())
 				product.setPrice( Float.valueOf( priceInput.getText() ));
@@ -120,7 +127,7 @@ public class ProductFormViewController {
 				productService.update(product);
 			}
 			
-			App.getInstance().changeView("ProductListView");
+			App.getInstance().showProductListView("ProductListView", "active");
 		}catch(IllegalArgumentException e){
 			errorLabel.setText(e.getMessage());
 		}catch(Exception e){

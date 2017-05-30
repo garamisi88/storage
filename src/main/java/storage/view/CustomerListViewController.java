@@ -113,7 +113,7 @@ public class CustomerListViewController {
 		emailCol.setCellValueFactory(new PropertyValueFactory<Customer, String>("email"));
 		phoneCol.setCellValueFactory(new PropertyValueFactory<Customer, String>("phone"));
 		
-		customerTable.getSelectionModel().selectedItemProperty().addListener((o, oldvalue, newvalue) -> showCustomerDetails(newvalue));;
+		customerTable.getSelectionModel().selectedItemProperty().addListener((o, oldvalue, newvalue) -> showCustomerDetails(newvalue));
 	}
 	
 	/**

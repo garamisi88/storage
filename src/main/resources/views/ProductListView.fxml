@@ -42,6 +42,7 @@
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -52,20 +53,22 @@
                      <children>
                         <Label text="Termék neve" />
                         <Label text="Raktározási szám" GridPane.rowIndex="1" />
-                        <Label text="Készlet" GridPane.rowIndex="4" />
+                        <Label text="Készlet" GridPane.rowIndex="5" />
                         <Label fx:id="nameLabel" text="Label" GridPane.columnIndex="1" />
                         <Label fx:id="skuLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="priceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="Minimum készlet" GridPane.rowIndex="5" />
-                        <Label text="Optimális készlet" GridPane.rowIndex="6" />
-                        <Label text="Lejárati dátum" GridPane.rowIndex="7" />
-                        <Label text="Alapár" GridPane.rowIndex="2" />
-                        <Label text="Eladási ár" GridPane.rowIndex="3" />
-                        <Label fx:id="sellPriceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="quantityLabel" text="Label" textFill="#c50b0b" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="minQuantityLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="optQuantityLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label fx:id="expiryLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label fx:id="priceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Minimum készlet" GridPane.rowIndex="6" />
+                        <Label text="Optimális készlet" GridPane.rowIndex="7" />
+                        <Label text="Lejárati dátum" GridPane.rowIndex="8" />
+                        <Label text="Alapár" GridPane.rowIndex="3" />
+                        <Label text="Eladási ár" GridPane.rowIndex="4" />
+                        <Label fx:id="sellPriceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="quantityLabel" text="Label" textFill="#c50b0b" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="minQuantityLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="optQuantityLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label fx:id="expiryLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label text="Beszerzési ár" GridPane.rowIndex="2" />
+                        <Label fx:id="entryPriceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <Label layoutX="14.0" layoutY="14.0" style="-fx-font-weight: 700;" text="Termék adatai" />

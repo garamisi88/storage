@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="storage.view.WasteProductListController">
+	<top>
+		<fx:include fx:id="menuBar" source="MainMenuView.fxml" />
+	</top>
+   <center>
+      <TableView fx:id="productTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="nameCol" prefWidth="132.0" text="Teréknév" />
+          <TableColumn fx:id="skuCol" prefWidth="136.0" text="Raktározási szám" />
+            <TableColumn fx:id="quantityCol" prefWidth="128.0" text="Mennyiség" />
+            <TableColumn fx:id="priceCol" minWidth="0.0" prefWidth="133.0" text="Egységár" />
+            <TableColumn fx:id="entryPriceCol" prefWidth="138.0" text="Beszerzési ár" />
+            <TableColumn fx:id="expiryDateCol" prefWidth="128.0" text="Lejárati dátum" />
+        </columns>
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#viewWasteProductAction" text="Megtekintés" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </TableView>
+   </center>
+</BorderPane>

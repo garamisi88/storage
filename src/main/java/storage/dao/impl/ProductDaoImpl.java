@@ -98,7 +98,7 @@ public class ProductDaoImpl implements ProductDao{
 		EntityManager em = emf.createEntityManager();
 		List<Product> list = null;
 		try{
-			TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.quantity < p.minimumQuantity", Product.class);
+			TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE (p.quantity < p.minimumQuantity or p.quantity = 0) and (p.expiryDate > now() or p.expiryDate is null)", Product.class);
 			list = query.getResultList();
 		}catch(Exception e){
 			logger.error(e.getMessage());

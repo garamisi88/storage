@@ -27,11 +27,11 @@ public class ProductServiceTest {
 		LocalDate date2 = LocalDate.now().plusDays(5);
 		LocalDate date3 = LocalDate.now().plusDays(20);
 		
-		Product product = new Product(1, "28920012", "Zakó", 3000, 3, 10, 5, date1);
-		Product product2 = new Product(2, "27890242", "", 289, 25, 30, 15, date2);
-		Product product3 = new Product(3, "", "Ásványvíz", 89, 40, 130, 0, date3);
-		Product product4 = new Product(4, "21131221", "Zeller", 0, 0, 0, 0, date2);
-		Product product5 = new Product(5, "123123", "Macska eledel", 2349,0, 0,0, date3);
+		Product product = new Product(1, "28920012", "Zakó", 3000, 3, 10, 5, date1, 1720);
+		Product product2 = new Product(2, "27890242", "", 289, 25, 30, 15, date2, 123);
+		Product product3 = new Product(3, "", "Ásványvíz", 89, 40, 130, 0, date3, 63);
+		Product product4 = new Product(4, "21131221", "Zeller", 0, 0, 0, 0, date2, 123);
+		Product product5 = new Product(5, "123123", "Macska eledel", 2349,0, 0,0, date3, 0);
 		
 		Mockito.when(productDao.get(1)).thenReturn(product);
 		Mockito.when(productDao.get(2)).thenReturn(product2);
@@ -73,13 +73,20 @@ public class ProductServiceTest {
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
-	public void testFailedQuantity(){
+	public void testFailedEntryPrice(){
 		productService.validateProduct(productDao.get(5));
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testFailedPrice(){
 		productService.validateProduct(productDao.get(4));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testLowPrice(){
+		Product product = productDao.get(1);
+		product.setEntryPrice(4000);
+		productService.validateProduct(product);
 	}
 	
 	

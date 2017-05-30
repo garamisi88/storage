@@ -40,6 +40,11 @@ public class Product {
 	private float price;
 	
 	/**
+	 * A termék bekerülési ára.
+	 */
+	private float entryPrice;
+	
+	/**
 	 * A termékből rendelkezésre álló készlet.
 	 */
 	private int quantity;
@@ -77,9 +82,10 @@ public class Product {
 	 * @param optimalQuantity	A termék optimális készlete
 	 * @param minimumQuantity	A termék minimum készlete
 	 * @param expiryDate		A termék lejárati dátuma
+	 * @param entryPrice		A termék bekerülési ára
 	 */
 	public Product(int id, String sku, String name, float price, int quantity, int optimalQuantity,
-			int minimumQuantity, LocalDate expiryDate) {
+			int minimumQuantity, LocalDate expiryDate, float entryPrice) {
 		this.id = id;
 		this.sku = sku;
 		this.name = name;
@@ -88,6 +94,7 @@ public class Product {
 		this.optimalQuantity = optimalQuantity;
 		this.minimumQuantity = minimumQuantity;
 		this.expiryDate = expiryDate;
+		this.entryPrice = entryPrice;
 	}
 
 
@@ -220,6 +227,24 @@ public class Product {
 		this.expiryDate = expiryDate;
 	}
 	
+	
+	
+	/**
+	 * A termék bekerülési árát visszaadó metódus.
+	 * @return a termék bekerülési ára
+	 */
+	public float getEntryPrice() {
+		return entryPrice;
+	}
+
+	/**
+	 * A termék bekerülési árát beállító metódus.
+	 * @param entryPrice a termék bekerülési ára
+	 */
+	public void setEntryPrice(float entryPrice) {
+		this.entryPrice = entryPrice;
+	}
+
 	@Override
 	public String toString() {
 		return this.name+" ("+this.sku+")";

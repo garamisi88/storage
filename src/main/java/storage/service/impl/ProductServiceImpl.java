@@ -51,8 +51,10 @@ public class ProductServiceImpl implements ProductService{
 			throw new IllegalArgumentException("A raktározási szám megadása kötelező!");
 		if(product.getPrice() <= 0)
 			throw new IllegalArgumentException("A termék árának nullánál nagyobbnak kell lennie!");
-		if(product.getQuantity() < 1)
-			throw new IllegalArgumentException("A mennyiség értéke csak nullánál nagyobb egész szám lehet!");
+		if(product.getEntryPrice() <= 0)
+			throw new IllegalArgumentException("Kérem adja meg a termék bekerülési árát.");
+		if(product.getPrice() < product.getEntryPrice())
+			throw new IllegalArgumentException("A termék alapára nem lehet kisebb, mint a bekerülési érték!");
 		
 		return true;
 	}
@@ -85,7 +87,7 @@ public class ProductServiceImpl implements ProductService{
 		if(product.getMinimumQuantity() == 0)
 			return false;
 		
-		return (product.getMinimumQuantity() > 0 && product.getQuantity() < product.getMinimumQuantity());
+		return product.getQuantity() < product.getMinimumQuantity();
 	}
 
 	/* (non-Javadoc)

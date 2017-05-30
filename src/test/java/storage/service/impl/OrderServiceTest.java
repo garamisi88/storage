@@ -33,7 +33,7 @@ public class OrderServiceTest {
 		orderDao = Mockito.mock(OrderDaoImpl.class);
 		productDao = Mockito.mock(ProductDao.class);
 		
-		Product product = new Product(1, "12341235", "Termék", 2400, 3, 5, 2, null);
+		Product product = new Product(1, "12341235", "Termék", 2400, 3, 5, 2, null, 1310);
 		Customer customer = new Customer("Béla", "teszt@teszt.hu", "+36301234567");
 		
 		Calendar calendar = Calendar.getInstance();

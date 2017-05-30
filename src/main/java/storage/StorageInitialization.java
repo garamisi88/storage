@@ -37,6 +37,7 @@ public class StorageInitialization {
 		product.setName("Pizza");
 		product.setSku("QWER-123");
 		product.setPrice(2000);
+		product.setEntryPrice(467);
 		product.setQuantity(20);
 		product.setOptimalQuantity(70);
 		product.setMinimumQuantity(30);
