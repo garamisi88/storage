@@ -1,51 +1,104 @@
 package storage.view;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.text.SimpleDateFormat;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import storage.App;
 import storage.model.MyOrder;
-import storage.service.impl.OrderServiceImpl;
+import storage.model.OrderItem;
 
 public class ClosedOrderViewController {
 	
-	private static final OrderServiceImpl orderService = new OrderServiceImpl();
-	
-	private ObservableList<MyOrder> orders = FXCollections.observableArrayList();
-	
-	@FXML
-	private TableView<MyOrder> orderTable;
+	private MyOrder order;
+
+	private ObservableList<OrderItem> orderItems = FXCollections.observableArrayList();
 	
 	@FXML
-	private TableColumn<MyOrder, String> referenceCol;
+	private Label summaryLabel;
 	
 	@FXML
-	private TableColumn<MyOrder, String> customerCol;
+	private Label referenceLabel;
 	
 	@FXML
-	private TableColumn<MyOrder, Float> priceCol;
+	private Label dateLabel;
 	
 	@FXML
-	private TableColumn<MyOrder, LocalDate> dateCol;
+	private Label nameLabel;
 	
 	@FXML
-	private void initialize(){
-		List<MyOrder> list = orderService.getAll("closed");
-		if(list != null && list.size() > 0){
-			orders.addAll(list);
-			System.out.println("Lezárt rendelések szám: "+list.size());
+	private Label emailLabel;
+	
+	@FXML
+	private Label phoneLabel;
+	
+	@FXML
+	private Label countryLabel;
+	
+	@FXML
+	private Label zipLabel;
+	
+	@FXML
+	private Label cityLabel;
+	
+	@FXML
+	private Label streetLabel;
+	
+	@FXML
+	private TableView<OrderItem> orderItemTable;
+	
+	@FXML
+	private TableColumn<OrderItem, String> productCol;
+	
+	@FXML
+	private TableColumn<OrderItem, Integer> quantityCol;
+	
+	@FXML
+	private TableColumn<OrderItem, Float> priceCol;
+	
+	
+	private void setOrderDatas(){
+		referenceLabel.setText(order.getReferenceId());
 		
-			orderTable.setItems(orders);
-			
-			referenceCol.setCellValueFactory(new PropertyValueFactory<MyOrder, String>("referenceId"));
-			customerCol.setCellValueFactory(new PropertyValueFactory<MyOrder, String>("customer"));
-			dateCol.setCellValueFactory(new PropertyValueFactory<MyOrder, LocalDate>("orderDate"));
-			priceCol.setCellValueFactory(new PropertyValueFactory<MyOrder, Float>("price"));
-		}
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		dateLabel.setText( formatter.format(order.getOrderDate()) );
+		
+		summaryLabel.setText(order.getPrice()+" Ft");
+		
+		nameLabel.setText(order.getCustomer().getName());
+		emailLabel.setText(order.getCustomer().getEmail());
+		phoneLabel.setText(order.getCustomer().getPhone());
+		
+		countryLabel.setText(order.getCustomer().getAddress().getCountry());
+		zipLabel.setText(order.getCustomer().getAddress().getZip());
+		cityLabel.setText(order.getCustomer().getAddress().getCity());
+		streetLabel.setText(order.getCustomer().getAddress().getStreet());
+		
+		
+		orderItems.addAll(order.getOrderItems());
+		orderItemTable.setItems(orderItems);
+		
+		productCol.setCellValueFactory(new PropertyValueFactory<OrderItem, String>("product"));
+		quantityCol.setCellValueFactory(new PropertyValueFactory<OrderItem, Integer>("quantity"));
+		priceCol.setCellValueFactory(new PropertyValueFactory<OrderItem, Float>("price"));
+	}
+	
+	/**
+	 * Ez a metódus állítja be a megjelenítendő rendelést.
+	 * @param order
+	 */
+	public void setOrder(MyOrder order) {
+		this.order = order;
+		this.setOrderDatas();
+	}
+	
+	@FXML
+	private void backButtonAction(){
+		App.getInstance().changeView("ClosedOrderList");
 	}
 }

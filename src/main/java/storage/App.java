@@ -15,6 +15,7 @@ import storage.model.Customer;
 import storage.model.MyOrder;
 import storage.model.Product;
 import storage.model.User;
+import storage.view.ClosedOrderViewController;
 import storage.view.CustomerFormViewController;
 import storage.view.OrderFormViewController;
 import storage.view.ProductFormViewController;
@@ -204,6 +205,24 @@ public class App extends Application {
 			
 			primaryStage.show();
 			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
+		}
+	}
+	
+	/**
+	 * A lezárt rendeléseket megjelenítő metódus.
+	 * @param viewFile A nézetfájl neve
+	 * @param order A megtekinteni kívánt rendelés
+	 */
+	public void showClosedOrderDatas(String viewFile, MyOrder order){
+		FXMLLoader loader = new FXMLLoader();
+		loadView(viewFile, loader);
+		
+		if(view != null){
+			((ClosedOrderViewController)loader.getController()).setOrder(order);
+			Scene scene = new Scene(view);
+			primaryStage.setScene(scene);
+			
+			primaryStage.show();
 		}
 	}
 	
