@@ -8,7 +8,7 @@ import storage.App;
 import storage.model.Product;
 
 /**
- * Selejt termékek nézetért felelős controller
+ * Selejt termékek nézetért felelős controller.
  * @author Misi
  *
  */

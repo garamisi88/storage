@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
  * A rendelés tételeket leíró osztály.
  * @author Misi
@@ -17,6 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="order_items")
+@XmlRootElement(name="orderItem")
 public class OrderItem{
 	/**
 	 * A rendelés tétel azonosítója. 
@@ -88,6 +91,7 @@ public class OrderItem{
 	 * A tétel termékét visszaadó metódus.
 	 * @return a tétel terméke.
 	 */
+	@XmlElement(name="product")
 	public Product getProduct() {
 		return product;
 	}

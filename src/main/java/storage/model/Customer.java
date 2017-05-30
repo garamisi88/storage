@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * A vásárlókat leíró osztály. A vásálók címét egy beágyazott {@link storage.model.Address} osztály reprezentálja.
@@ -20,6 +22,7 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
+@XmlRootElement(name="customer")
 public class Customer {
 	
 	/**
@@ -78,6 +81,7 @@ public class Customer {
 	 * A megrendelő id-ját visszadó metódus.
 	 * @return A megrendelő id-ja
 	 */
+	@XmlAttribute
 	public int getId() {
 		return id;
 	}

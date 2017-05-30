@@ -7,6 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import storage.datasource.LocalDateHelper;
 
 /**
  * A termékeket leíró osztály.
@@ -14,6 +20,7 @@ import javax.persistence.Id;
  * 
  */
 @Entity
+@XmlRootElement(name="product")
 public class Product {
 
 	/**
@@ -103,6 +110,7 @@ public class Product {
 	 * Visszaadja a termék id-ját.
 	 * @return A termék id-ja
 	 */
+	@XmlAttribute
 	public int getId() {
 		return id;
 	}
@@ -119,6 +127,7 @@ public class Product {
 	 * Visszaadja a termék raktározási számát.
 	 * @return A termék raktározási száma
 	 */
+	@XmlElement(name="sku")
 	public String getSku() {
 		return sku;
 	}
@@ -215,6 +224,7 @@ public class Product {
 	 * Visszaadja a termék lejáratának dátumát.
 	 * @return A termék lejárati dátuma
 	 */
+	@XmlJavaTypeAdapter( value = LocalDateHelper.class )
 	public LocalDate getExpiryDate() {
 		return expiryDate;
 	}

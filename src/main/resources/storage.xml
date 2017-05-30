@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<storage>
+	<users>
+		<user>
+			<name>Teszt Elek</name>
+			<username>teszt.elek</username>
+			<password>teszt</password>
+		</user>
+	</users>
+	<products>
+		<product>
+			<name>Ásványvíz</name>
+			<sku>1234123123</sku>
+			<price>89</price>
+			<entryPrice>46</entryPrice>
+			<quantity>80</quantity>
+			<optimalQuantity>130</optimalQuantity>
+			<minimumQuantity>43</minimumQuantity>
+			<expiryDate>2017-09-20</expiryDate>
+		</product>
+		<product>
+			<name>Ragasztó</name>
+			<sku>872912122</sku>
+			<price>349</price>
+			<entryPrice>162</entryPrice>
+			<quantity>10</quantity>
+			<optimalQuantity>35</optimalQuantity>
+			<minimumQuantity>20</minimumQuantity>
+			<expiryDate></expiryDate>
+		</product>
+		<product>
+			<name>Karalábé</name>
+			<sku>98712312</sku>
+			<price>140</price>
+			<entryPrice>80</entryPrice>
+			<quantity>3</quantity>
+			<optimalQuantity>20</optimalQuantity>
+			<minimumQuantity>0</minimumQuantity>
+			<expiryDate>2017-05-20</expiryDate>
+		</product>
+		<product>
+			<name>Cola</name>
+			<sku>1239876</sku>
+			<price>320</price>
+			<entryPrice>176</entryPrice>
+			<quantity>50</quantity>
+			<optimalQuantity>20</optimalQuantity>
+			<minimumQuantity>12</minimumQuantity>
+			<expiryDate>2018-01-14</expiryDate>
+		</product>
+		<product>
+			<name>Kávé</name>
+			<sku>123987634123</sku>
+			<price>100</price>
+			<entryPrice>20</entryPrice>
+			<quantity>500</quantity>
+			<optimalQuantity>2000</optimalQuantity>
+			<minimumQuantity>160</minimumQuantity>
+			<expiryDate>2018-01-14</expiryDate>
+		</product>
+		<product>
+			<name>Tej</name>
+			<sku>1298712312</sku>
+			<price>289</price>
+			<entryPrice>119</entryPrice>
+			<quantity>11</quantity>
+			<optimalQuantity>20</optimalQuantity>
+			<minimumQuantity>0</minimumQuantity>
+			<expiryDate>2017-06-03</expiryDate>
+		</product>
+	</products>
+	<customers>
+		<customer>
+			<name>Gara Mihály</name>
+			<email>garamisi88@gmail.com</email>
+			<phone>+36301234567</phone>
+			<address>
+				<country>Magyarország</country>
+				<city>Debrecen</city>
+				<zip>4024</zip>
+				<street>Sumen utca 16 3/11</street>
+			</address>
+		</customer>
+		<customer>
+			<name>Teszt Elek Pál</name>
+			<email>teszt@cica.hu</email>
+			<phone>+363012394567</phone>
+			<address>
+				<country>Magyarország</country>
+				<city>Debrecen</city>
+				<zip>4025</zip>
+				<street>Piac utca 49</street>
+			</address>
+		</customer>
+	</customers>
+	<orders>
+		<order>
+			<orderDate>2017-05-30</orderDate>
+			<referenceId>14789123821-3</referenceId>
+			<closed>0</closed>
+			<price>200</price>
+			<customer id="1" />
+			<orderItems>
+				<orderItem>
+					<product id="5" />
+					<quantity>2</quantity>
+					<price>100</price>
+				</orderItem>
+			</orderItems>
+		</order>
+	</orders>
+</storage>

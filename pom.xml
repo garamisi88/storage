@@ -258,4 +258,5 @@
         </plugins>
     </reporting>
     <name>Gara Mihály - Raktár kezelés - beadandó feladat</name>
+    <description>Raktarkezelés beadandó feladat.</description>
 </project>

@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.GeneratedValue;
 
 /**
@@ -20,6 +24,7 @@ import javax.persistence.GeneratedValue;
  *
  */
 @Entity
+@XmlRootElement(name="order")
 public class MyOrder {
 	
 	/**
@@ -69,6 +74,7 @@ public class MyOrder {
 	 * Rendelés id-ját visszaadó metódus.
 	 * @return A rendelés id-ja
 	 */
+	@XmlAttribute
 	public int getId() {
 		return id;
 	}
@@ -102,6 +108,8 @@ public class MyOrder {
 	 * A rendelés tételeit visszaadó metódus.
 	 * @return A rendelés tételei
 	 */
+	@XmlElementWrapper(name="orderItems")
+	@XmlElement(name="orderItem")
 	public Collection<OrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -142,6 +150,7 @@ public class MyOrder {
 	 * Visszaadja a vásárlót.
 	 * @return A {@link storage.model.Customer} osztály megfelelő példánya
 	 */
+	@XmlElement(name="customer")
 	public Customer getCustomer() {
 		return customer;
 	}

@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * A felhasználókat reprezentáló osztály.
@@ -11,6 +13,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
+@XmlRootElement(name="user")
 public class User {
 	
 	/**
@@ -39,6 +42,7 @@ public class User {
 	 * A felhasználó id-ját visszaadó metódus.
 	 * @return a felhasználó id-ja.
 	 */
+	@XmlAttribute
 	public int getId() {
 		return id;
 	}

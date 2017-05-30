@@ -1,12 +1,10 @@
 package storage.view;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import storage.App;
@@ -46,7 +44,7 @@ public class ProductFormViewController {
 	private TextField optQuantityInput;
 	
 	@FXML
-	private TextField expiryDateInput;
+	private DatePicker datePicker;
 	
 	@FXML
 	private Label errorLabel;
@@ -85,7 +83,7 @@ public class ProductFormViewController {
 		optQuantityInput.setText(String.valueOf(this.product.getOptimalQuantity()));
 		
 		if(this.product.getExpiryDate() != null)
-			expiryDateInput.setText(this.product.getExpiryDate().format(DateTimeFormatter.ISO_DATE));
+			datePicker.setValue(this.product.getExpiryDate());
 	}
 	
 	@FXML
@@ -118,8 +116,8 @@ public class ProductFormViewController {
 			if(optQuantityInput.getText() != null && !optQuantityInput.getText().isEmpty())
 				product.setOptimalQuantity( Integer.valueOf( optQuantityInput.getText() ) );
 			
-			if(expiryDateInput.getText() != null && !expiryDateInput.getText().isEmpty())
-				product.setExpiryDate( LocalDate.parse( expiryDateInput.getText() ) );
+			if(datePicker.getValue() != null)
+				product.setExpiryDate( datePicker.getValue() );
 			
 			if(product.getId() == 0){
 				productService.save(product);

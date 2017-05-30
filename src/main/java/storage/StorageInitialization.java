@@ -1,19 +1,21 @@
 package storage;
 
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.io.File;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import storage.dao.impl.CustomerDaoImpl;
 import storage.dao.impl.OrderDaoImpl;
 import storage.dao.impl.ProductDaoImpl;
 import storage.dao.impl.UserDaoImpl;
-import storage.model.Address;
+import storage.datasource.Storage;
+
 import storage.model.Customer;
 import storage.model.MyOrder;
 import storage.model.OrderItem;
@@ -27,89 +29,63 @@ import storage.model.User;
  */
 public class StorageInitialization {
 
-	/**
-	 * Ez a függvény menti be az adatbázisba az alap termékeket.
-	 */
-	public static void setBaseProducts(){
-		ProductDaoImpl dao = new ProductDaoImpl();
-
-		Product product = new Product();
-		product.setName("Pizza");
-		product.setSku("QWER-123");
-		product.setPrice(2000);
-		product.setEntryPrice(467);
-		product.setQuantity(20);
-		product.setOptimalQuantity(70);
-		product.setMinimumQuantity(30);
-		product.setExpiryDate(LocalDate.now().plusDays(4));
-
-		dao.save(product);
-	}
+	private static final Logger logger = LoggerFactory.getLogger(StorageInitialization.class);
 
 	/**
-	 * Az felhasználó-t létrehozó metódus.
+	 * A megadott xml fájlból inicializálja az adatbázist.
 	 */
-	public static void setUser(){
-		UserDaoImpl dao = new UserDaoImpl();
-
-		User user = new User();
-		user.setName("Teszt Elek");
-		user.setUsername("teszt.elek");
-		user.setPassword(DigestUtils.sha1Hex("teszt"));
-
-		dao.save(user);
-	}
-
-	/**
-	 * Létrehoz egy rendelést, és azt rögzíti az adatbázisban.
-	 */
-	public static void setOrder(){
-		OrderDaoImpl dao = new OrderDaoImpl();
-		ProductDaoImpl productDao = new ProductDaoImpl();
-		CustomerDaoImpl customerDao = new CustomerDaoImpl();
-		MyOrder order = new MyOrder();
-
-
+	public static void loadFromXML(){
+		Storage storage;
+		
+		File file = new File(StorageInitialization.class.getResource("/storage.xml").getFile());
+		
+		try {
+			JAXBContext jaxbC = JAXBContext.newInstance(Storage.class);
+			Unmarshaller unmarshaller = jaxbC.createUnmarshaller();
 			
-		Customer customer = customerDao.get(1);
-		order.setCustomer(customer);
-		
-		Calendar calendar = Calendar.getInstance();
-		Date now = calendar.getTime();
-		int rand = new Random().nextInt(9) + 1;
-		order.setReferenceId(now.getTime() +"-"+rand);	
-
-		order.setOrderDate(now);
-		
-		Product product = productDao.get(1);
-		List<OrderItem> items = new LinkedList<OrderItem>();
-
-		OrderItem item = new OrderItem();
-		item.setOrder(order);
-		item.setProduct(product);
-		item.setPrice(100);
-		item.setQuantity(2);
-
-		items.add(item);
-		
-		order.setOrderItems(items);
-		order.setPrice(200);
-		dao.save(order);
-
+			storage = (Storage) unmarshaller.unmarshal(file);
+			saveDatasToDb(storage);
+		} catch (JAXBException e) {
+			logger.error(e.getMessage());
+		}
 	}
-
-	/**
-	 * Ez a metódus beszúrja az adatbázisba az első vásárlót.
-	 */
-	public static void setCustomer() {
-		CustomerDaoImpl dao = new CustomerDaoImpl();
-
-		Customer customer = new Customer("Gara Mihály", "garamisi88@gmail.com", "+36301234567");
-		Address address = new Address("4024", "Debrecen", "Sumen utca 16", "Magyarország");
-		customer.setAddress(address);
-
-		dao.save(customer);
-
-
+	
+	private static void saveDatasToDb(Storage storage){
+		UserDaoImpl userDao = new UserDaoImpl();
+		CustomerDaoImpl customerDao = new CustomerDaoImpl();
+		ProductDaoImpl productDao = new ProductDaoImpl();
+		OrderDaoImpl orderDao = new OrderDaoImpl();
+		
+		if(storage.getUsers().size() > 0){
+			for (User user : storage.getUsers()) {
+				user.setPassword(DigestUtils.sha1Hex(user.getPassword()));
+				userDao.save(user);
+			}
+		}
+		
+		if(storage.getCustomers().size() > 0){
+			for (Customer customer : storage.getCustomers()){
+				customerDao.save(customer);
+			}
+		}
+		
+		if(storage.getProducts().size() > 0){
+			for(Product product : storage.getProducts()){
+				productDao.save(product);
+			}
+		}
+		
+		if(storage.getOrders().size() > 0){
+			for(MyOrder order : storage.getOrders()){
+				for (OrderItem item : order.getOrderItems()) {
+					Product product = productDao.get(item.getProduct().getId());
+					item.setProduct(product);
+					item.setOrder(order);
+				}
+				Customer customer = customerDao.get(order.getCustomer().getId());
+				order.setCustomer(customer);
+				orderDao.save(order);
+			}
+		}
 	}
 }

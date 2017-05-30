@@ -1,5 +1,5 @@
 /**
- * Ebben a csomagban található az adatkapcsolatot kezelő osztály.
+ * Ebben a csomagban találhatóak az adatkapcsolatot kezelő, valamint segítő osztályok.
  * @author Misi
  *
  */

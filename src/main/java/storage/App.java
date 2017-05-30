@@ -65,15 +65,8 @@ public class App extends Application {
 	 * @param args parancssori argunemtumok
 	 */
 	public static void main(String[] args){
-		logger.info("Elindult az alkalmazás!");
-		StorageInitialization.setUser();
-		logger.info("Inicializálásra kerültek a userek.");
-		StorageInitialization.setBaseProducts();
-		logger.info("Beszúrtam az első terméket az adatbázisba");
-		StorageInitialization.setCustomer();
-		logger.info("Létrejött a vásárló.");
-		StorageInitialization.setOrder();
-		logger.info("Mentésre került az alap rendelés");
+		StorageInitialization.loadFromXML();
+		logger.info("Adatok betöltve a storage.xml-ből");
 		
 		launch(args);
 	}
@@ -169,6 +162,11 @@ public class App extends Application {
 		}
 	}
 	
+	/**
+	 * Termék listákat betöltő metódus. A paraméterben kapott típus listáját fogja elkérni a {@link storage.service.impl.ProductServiceImpl} osztálytól.
+	 * @param viewFile a nézet fájl neve
+	 * @param type Terméklista típusa
+	 */
 	public void showProductListView(String viewFile, String type){
 		FXMLLoader loader = new FXMLLoader();
 		loadView(viewFile, loader);

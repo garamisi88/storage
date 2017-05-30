@@ -1,6 +1,7 @@
 package storage.model;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * A vásárlók címét reprezentáló osztály.
@@ -8,6 +9,7 @@ import javax.persistence.Embeddable;
  *
  */
 @Embeddable
+@XmlRootElement(name="address")
 public class Address {
 	
 	/**

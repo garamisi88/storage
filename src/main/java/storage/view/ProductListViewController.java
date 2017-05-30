@@ -105,6 +105,8 @@ public class ProductListViewController {
 			optQuantityLabel.setText(product.getOptimalQuantity()+" db");
 			if(product.getExpiryDate() != null)
 				expiryLabel.setText(product.getExpiryDate().format(DateTimeFormatter.ISO_DATE));
+			else
+				expiryLabel.setText("");
 			
 			if(productService.needToOrder(product)){
 				quantityLabel.setTextFill(Color.web("#c50b0b"));
@@ -142,7 +144,7 @@ public class ProductListViewController {
 	}
 
 	/**
-	 * A lista típusát beállító változó
+	 * A lista típusát beállító változó.
 	 * @param listType a lista típusa
 	 */
 	public void setListType(String listType) {
