@@ -46,7 +46,13 @@ public class OrderServiceImpl implements OrderService{
 		if(order.getCustomer() == null)
 			throw new IllegalArgumentException("Válasszon vásárlót!");
 		if(order.getOrderItems() == null || order.getOrderItems().size() == 0)
-			throw new IllegalArgumentException("Nem rendelt terméket a rendeléshez!");
+			throw new IllegalArgumentException("Nem választott terméket a rendeléshez!");
+		
+		ProductServiceImpl productService = new ProductServiceImpl();
+		for (OrderItem item : order.getOrderItems()) {
+			if(productService.isWasteProduct(item.getProduct()))
+				throw new IllegalArgumentException("A(z) "+item.getProduct().getName()+" szavatossága lejárt!");
+		}
 		
 		return true;
 	}

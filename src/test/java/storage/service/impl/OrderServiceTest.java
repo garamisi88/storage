@@ -1,5 +1,6 @@
 package storage.service.impl;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,6 +35,7 @@ public class OrderServiceTest {
 		productDao = Mockito.mock(ProductDao.class);
 		
 		Product product = new Product(1, "12341235", "Termék", 2400, 3, 5, 2, null, 1310);
+		Product product2 = new Product(2, "12341239", "Lejárt Termék", 2300, 3, 5, 2, LocalDate.of(2017, 5, 2), 1110);
 		Customer customer = new Customer("Béla", "teszt@teszt.hu", "+36301234567");
 		
 		Calendar calendar = Calendar.getInstance();
@@ -77,10 +79,24 @@ public class OrderServiceTest {
 		order3.setCustomer(customer);
 		order3.setOrderDate(date);
 		
+		MyOrder order4 = new MyOrder();
+		order4.setReferenceId("12312312323");
+		order4.setCustomer(customer);
+		order4.setOrderDate(date);
+		
+		OrderItem item4 = new OrderItem();
+		item4.setPrice(20);
+		item4.setProduct(product2);
+		item4.setQuantity(2);
+		item4.setOrder(order4);
+		
+		order4.setOrderItems(Arrays.asList(item4));
+		
 		
 		Mockito.when(orderDao.get(1)).thenReturn(order);
 		Mockito.when(orderDao.get(2)).thenReturn(order2);
 		Mockito.when(orderDao.get(3)).thenReturn(order3);
+		Mockito.when(orderDao.get(4)).thenReturn(order4);
 		
 		Mockito.when(productDao.get(1)).thenReturn(product);
 	}
@@ -108,6 +124,11 @@ public class OrderServiceTest {
 	@Test
 	public void checkQuantity(){
 		Assert.assertEquals(5, orderService.getProductCartQuantity(orderDao.get(2).getOrderItems(), productDao.get(1)));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void wasteProductInCart(){
+		orderService.validateOrder(orderDao.get(4));
 	}
 	
 	@After

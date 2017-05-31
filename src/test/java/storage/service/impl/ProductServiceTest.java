@@ -89,6 +89,11 @@ public class ProductServiceTest {
 		productService.validateProduct(product);
 	}
 	
+	@Test
+	public void testWasteProductCheck(){
+		Assert.assertFalse(productService.isWasteProduct(productDao.get(3)));
+	}
+	
 	
 	@Test
 	public void needToOrder(){

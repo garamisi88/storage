@@ -70,9 +70,16 @@ public interface ProductService {
 	Product get(int id);
 	
 	/**
-	 * A függvény megállítja, hogy rendelésre szorul-e a termék.
+	 * A függvény megállapítja, hogy rendelésre szorul-e a termék.
 	 * @param product A {@link storage.model.Product} osztály egy példánya
-	 * @return boolean Rendelésre szorul-e a termék
+	 * @return Rendelésre szorul-e a termék
 	 */
 	boolean needToOrder(Product product);
+	
+	/**
+	 * Ez a metódus határozza meg egy termékről, hogy az selejt-e.
+	 * @param product A vizsgálandó termék.
+	 * @return Selejt-e az adott termék
+	 */
+	boolean isWasteProduct(Product product);
 }

@@ -108,5 +108,33 @@
 				</orderItem>
 			</orderItems>
 		</order>
+		<order>
+			<orderDate>2017-05-23</orderDate>
+			<referenceId>14789128821-3</referenceId>
+			<closed>1</closed>
+			<price>349</price>
+			<customer id="2" />
+			<orderItems>
+				<orderItem>
+					<product id="2" />
+					<quantity>1</quantity>
+					<price>349</price>
+				</orderItem>
+			</orderItems>
+		</order>
+		<order>
+			<orderDate>2017-05-19</orderDate>
+			<referenceId>14789128971-5</referenceId>
+			<closed>0</closed>
+			<price>112</price>
+			<customer id="1" />
+			<orderItems>
+				<orderItem>
+					<product id="3" />
+					<quantity>2</quantity>
+					<price>56</price>
+				</orderItem>
+			</orderItems>
+		</order>
 	</orders>
 </storage>

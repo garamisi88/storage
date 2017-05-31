@@ -123,4 +123,14 @@ public class ProductServiceImpl implements ProductService{
 				return productDao.getActiveProducts();
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see storage.service.ProductService#isWasteProduct(storage.model.Product)
+	 */
+	@Override
+	public boolean isWasteProduct(Product product) {
+		if(product.getExpiryDate() != null && product.getExpiryDate().isBefore(LocalDate.now()))
+			return true;
+		return false;
+	}
 }
