@@ -141,9 +141,11 @@ public class OrderDaoImpl implements OrderDao {
 		
 		try{
 			em.getTransaction().begin();
+			order =	em.merge(order);
 			em.remove(order);
 			em.getTransaction().commit();
 		}catch(Exception e){
+			e.printStackTrace();
 			logger.error(e.getMessage());
 		}finally{
 			em.close();

@@ -61,6 +61,7 @@
                     <buttons>
                       <Button mnemonicParsing="false" onAction="#addButtonAction" text="Új" />
                         <Button mnemonicParsing="false" onAction="#editButtonAction" text="Módosít" />
+                        <Button mnemonicParsing="false" onAction="#deleteButtonAction" text="Törlés" />
                     </buttons>
                      <padding>
                         <Insets left="14.0" right="14.0" />
