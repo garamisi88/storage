@@ -1,6 +1,9 @@
 package storage;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -36,16 +39,19 @@ public class StorageInitialization {
 	 */
 	public static void loadFromXML(){
 		Storage storage;
-		
-		File file = new File(StorageInitialization.class.getResource("/storage.xml").getFile());
-		
 		try {
+			InputStream inputStream = StorageInitialization.class.getResourceAsStream("/storage.xml");
+			BufferedReader file = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+			
 			JAXBContext jaxbC = JAXBContext.newInstance(Storage.class);
 			Unmarshaller unmarshaller = jaxbC.createUnmarshaller();
 			
 			storage = (Storage) unmarshaller.unmarshal(file);
 			saveDatasToDb(storage);
+		
 		} catch (JAXBException e) {
+			logger.error(e.getMessage());
+		} catch (UnsupportedEncodingException e) {
 			logger.error(e.getMessage());
 		}
 	}
