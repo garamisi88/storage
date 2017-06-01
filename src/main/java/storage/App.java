@@ -184,12 +184,12 @@ public class App extends Application {
 	 * @param viewFile 	A nézet fájl neve
 	 * @param customer	A módosítandó {@link storage.model.Customer} objektum
 	 */
-	public void showCustomerFormView(String viewFile, Object customer){
+	public void showCustomerFormView(String viewFile, Customer customer){
 		FXMLLoader loader = new FXMLLoader();
 		loadView(viewFile, loader);
 		
 		if(view != null){
-			((CustomerFormViewController)loader.getController()).setCustomer((Customer)customer);
+			((CustomerFormViewController)loader.getController()).setCustomer(customer);
 			this.showView();
 			logger.info("Nézet váltás történt, az új nézet a "+viewFile+".fxml");
 		}
